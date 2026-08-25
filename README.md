@@ -2,6 +2,8 @@
 
 The goal of this repository is to understand the dynamics and geometry of training with Muon and its variants.
 
+Published results and reports: [pvahidif.github.io/muon_research](https://pvahidif.github.io/muon_research/)
+
 ## Geon
 
 Every run in this repo trains under a single optimizer, `Geon` (`src/muon_research/optim/geon.py`). Geon keeps Adam-style state (`step`, `m`, `v`) for **every** parameter regardless of which update rule that parameter is currently using, and only decides at step time, per parameter, how to turn that state into an update. Four kinds of update rule are allowed, chosen independently per parameter and per step:
