@@ -1,0 +1,29 @@
+/* styles.css */
+
+body {
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.quarto-title-block .title {
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+figcaption {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.cell-output-display img {
+  max-width: 100%;
+  height: auto;
+}
+
+blockquote {
+  font-size: 1.02em;
+}
+
+.quarto-float-fig .quarto-float-caption {
+  text-align: center;
+}
