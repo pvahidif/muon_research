@@ -1,0 +1,28 @@
+[2026-08-23 02:39:55.574605] ====================================================================================================
+[2026-08-23 02:39:55.574717] Config: TrainConfig(data_source='data/fineweb10B_v500', train_steps=4000, report_steps=200, seq_len=1024, val_size=2097152, batch_size=32768, mbs=32, vocab_size=500, num_layers=1, model_dim=192, train_data_pattern='fineweb_train_*.bin', val_data_pattern='fineweb_val_*.bin', seed=1337, model_type='gpt', expansion_ratio=4.0, head_dim=64, num_heads=3, embed_dim=None, num_tokens=None, zero_proj_init=False, lr_cooldown_frac=0.7, geon_eps=1e-10, geon_s_min=1e-05, geon_s_max=100000.0, checkpoint_steps=None)
+[2026-08-23 02:39:55.574787] Rules: [Rule(name='embed', patterns=['embed.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.3, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='proj', patterns=['proj.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.003125, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='one_d', patterns=['*.bias', '*.gains'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.01, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='two_d', patterns=['blocks.*.attn.*.weight', 'blocks.*.mlp.*.weight'], start=0, end=None, update='muon', sizing='learning_rate', lr=0.02, betas=(0.9, 0.95), nesterov=False, wd_raw=0.0002, coeff=1.0, warmup_steps=0)]
+[2026-08-23 02:39:55.574816] ====================================================================================================
+[2026-08-23 02:39:55.574851] Running PyTorch 2.13.0+cu130 compiled for CUDA 13.0
+[2026-08-23 02:39:55.574875] ====================================================================================================
+[2026-08-23 02:39:57.476932] rules OK: 4 rules uniquely cover 19 params x [0, 4000) steps
+[2026-08-23 02:40:00.122225] step:0/4000 val_loss:6.38892 train_time:0.000s step_avg:0.10ms
+[2026-08-23 02:40:04.096472] step:200/4000 rolling_loss:3.35972 val_loss:3.21512 train_time:3.715s step_avg:18.58ms
+[2026-08-23 02:40:07.556330] step:400/4000 rolling_loss:3.07843 val_loss:3.05716 train_time:6.916s step_avg:17.29ms
+[2026-08-23 02:40:11.024672] step:600/4000 rolling_loss:2.98333 val_loss:2.99086 train_time:10.123s step_avg:16.87ms
+[2026-08-23 02:40:14.506521] step:800/4000 rolling_loss:2.97381 val_loss:2.95362 train_time:13.344s step_avg:16.68ms
+[2026-08-23 02:40:17.989761] step:1000/4000 rolling_loss:2.90197 val_loss:2.93156 train_time:16.569s step_avg:16.57ms
+[2026-08-23 02:40:21.481406] step:1200/4000 rolling_loss:2.88868 val_loss:2.91826 train_time:19.797s step_avg:16.50ms
+[2026-08-23 02:40:24.971933] step:1400/4000 rolling_loss:2.87130 val_loss:2.87780 train_time:23.027s step_avg:16.45ms
+[2026-08-23 02:40:28.470058] step:1600/4000 rolling_loss:2.86445 val_loss:2.86879 train_time:26.262s step_avg:16.41ms
+[2026-08-23 02:40:31.970273] step:1800/4000 rolling_loss:2.83813 val_loss:2.84775 train_time:29.500s step_avg:16.39ms
+[2026-08-23 02:40:35.484809] step:2000/4000 rolling_loss:2.81476 val_loss:2.83634 train_time:32.751s step_avg:16.38ms
+[2026-08-23 02:40:39.000866] step:2200/4000 rolling_loss:2.79317 val_loss:2.82038 train_time:36.003s step_avg:16.37ms
+[2026-08-23 02:40:42.512302] step:2400/4000 rolling_loss:2.79223 val_loss:2.80690 train_time:39.251s step_avg:16.35ms
+[2026-08-23 02:40:46.031856] step:2600/4000 rolling_loss:2.79426 val_loss:2.81317 train_time:42.508s step_avg:16.35ms
+[2026-08-23 02:40:49.549495] step:2800/4000 rolling_loss:2.80278 val_loss:2.78868 train_time:45.761s step_avg:16.34ms
+[2026-08-23 02:40:53.069922] step:3000/4000 rolling_loss:2.76823 val_loss:2.77838 train_time:49.016s step_avg:16.34ms
+[2026-08-23 02:40:56.702327] step:3200/4000 rolling_loss:2.75493 val_loss:2.76751 train_time:52.386s step_avg:16.37ms
+[2026-08-23 02:41:00.227900] step:3400/4000 rolling_loss:2.73806 val_loss:2.75840 train_time:55.645s step_avg:16.37ms
+[2026-08-23 02:41:03.765388] step:3600/4000 rolling_loss:2.69259 val_loss:2.74843 train_time:58.918s step_avg:16.37ms
+[2026-08-23 02:41:07.313802] step:3800/4000 rolling_loss:2.72424 val_loss:2.73638 train_time:62.203s step_avg:16.37ms
+[2026-08-23 02:41:10.849620] step:4000/4000 rolling_loss:2.72424 val_loss:2.73067 train_time:65.473s step_avg:16.37ms

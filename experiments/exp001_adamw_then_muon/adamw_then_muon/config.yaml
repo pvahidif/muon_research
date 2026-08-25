@@ -1,0 +1,58 @@
+__for_ref:
+  id_adamw: &id_adamw
+    rules.two_d.update: adamw
+    rules.two_d.lr: 0.003
+    rules.two_d.betas: [0.9, 0.95]
+    rules.two_d.nesterov: false
+    rules.two_d.wd_raw: 0.0002
+  id_muon: &id_muon
+    rules.two_d.update: muon
+    rules.two_d.lr: 0.02
+    rules.two_d.betas: [0.9, 0.95]
+    rules.two_d.nesterov: false
+    rules.two_d.wd_raw: 0.0002
+
+runs:
+  - name: adamw
+    path: experiments/exp000_muon_and_adamw/adamw/seed_1337/rules.two_d.lr_0.003
+    steps: [100, 200]
+    fork_steps: 256
+    branch_specs:
+      - {name: adamw, override: *id_adamw}
+      - {name: muon, override: *id_muon}
+  - name: adamw
+    path: experiments/exp000_muon_and_adamw/adamw/seed_1337/rules.two_d.lr_0.003
+    steps: [500, 1000]
+    fork_steps: 512
+    branch_specs:
+      - {name: adamw, override: *id_adamw}
+      - {name: muon, override: *id_muon}
+  - name: adamw
+    path: experiments/exp000_muon_and_adamw/adamw/seed_1337/rules.two_d.lr_0.003
+    steps: [2000, 4000]
+    fork_steps: 2048
+    branch_specs:
+      - {name: adamw, override: *id_adamw}
+      - {name: muon, override: *id_muon}
+  - name: adamw
+    path: experiments/exp000_muon_and_adamw/adamw/seed_1337/rules.two_d.lr_0.003
+    steps: [6000, 8000]
+    fork_steps: 4000
+    branch_specs:
+      - {name: adamw, override: *id_adamw}
+      - {name: muon, override: *id_muon}
+
+branch_config:
+  prefork_steps: 0
+  fork_steps: 500
+  metric_schedule: &metric_schedule
+    _type: schedule
+    schedule:
+      - [0, 4, 1]
+      - [4, 16, 2]
+      - [16, 64, 4]
+      - [64, 256, 8]
+      - [256, 1024, 16]
+      - [1024, 4096, 64]
+  klmatch_schedule: *metric_schedule
+  shared_patterns: [embed.weight, proj.weight, '*.bias', '*.gains']

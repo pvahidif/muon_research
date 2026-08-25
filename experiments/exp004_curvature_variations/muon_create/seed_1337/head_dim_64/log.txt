@@ -1,0 +1,15 @@
+[2026-08-23 12:50:22.215163] ====================================================================================================
+[2026-08-23 12:50:22.215276] Config: TrainConfig(data_source='data/fineweb10B_v500', train_steps=1001, report_steps=200, seq_len=1024, val_size=2097152, batch_size=32768, mbs=32, vocab_size=500, num_layers=1, model_dim=192, train_data_pattern='fineweb_train_*.bin', val_data_pattern='fineweb_val_*.bin', seed=1337, model_type='gpt', expansion_ratio=4.0, head_dim=64, num_heads=3, embed_dim=None, num_tokens=None, zero_proj_init=False, lr_cooldown_frac=0.0, geon_eps=1e-10, geon_s_min=1e-05, geon_s_max=100000.0, checkpoint_steps=[1000])
+[2026-08-23 12:50:22.215337] Rules: [Rule(name='embed', patterns=['embed.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.3, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='proj', patterns=['proj.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.003125, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='one_d', patterns=['*.bias', '*.gains'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.01, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='two_d', patterns=['blocks.*.attn.*.weight', 'blocks.*.mlp.*.weight'], start=0, end=None, update='muon', sizing='learning_rate', lr=0.02, betas=(0.9, 0.95), nesterov=False, wd_raw=0.0002, coeff=1.0, warmup_steps=0)]
+[2026-08-23 12:50:22.215366] ====================================================================================================
+[2026-08-23 12:50:22.215392] Running PyTorch 2.13.0+cu130 compiled for CUDA 13.0
+[2026-08-23 12:50:22.215420] ====================================================================================================
+[2026-08-23 12:50:23.683293] rules OK: 4 rules uniquely cover 19 params x [0, 1001) steps
+[2026-08-23 12:50:25.982372] step:0/1001 val_loss:6.38892 train_time:0.000s step_avg:0.03ms
+[2026-08-23 12:50:29.826976] step:200/1001 rolling_loss:3.35947 val_loss:3.21480 train_time:3.593s step_avg:17.97ms
+[2026-08-23 12:50:33.177212] step:400/1001 rolling_loss:3.07835 val_loss:3.05750 train_time:6.692s step_avg:16.73ms
+[2026-08-23 12:50:36.484134] step:600/1001 rolling_loss:2.98336 val_loss:2.99139 train_time:9.752s step_avg:16.25ms
+[2026-08-23 12:50:39.819587] step:800/1001 rolling_loss:2.97454 val_loss:2.95420 train_time:12.836s step_avg:16.04ms
+[2026-08-23 12:50:42.921165] [checkpoint] saved step 1000
+[2026-08-23 12:50:43.169481] step:1000/1001 rolling_loss:2.90186 val_loss:2.93126 train_time:15.937s step_avg:15.94ms
+[2026-08-23 12:50:43.440912] step:1001/1001 rolling_loss:2.90304 val_loss:2.93074 train_time:15.955s step_avg:15.94ms

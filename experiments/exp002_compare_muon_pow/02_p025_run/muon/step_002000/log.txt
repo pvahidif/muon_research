@@ -1,0 +1,46 @@
+[2026-08-23 08:59:09.092544] ====================================================================================================
+[2026-08-23 08:59:09.092624] Branching from: experiments/exp000_muon_and_adamw/muon/seed_1337/rules.two_d.lr_0.02 step=2000 branch_specs=['svdp_p025']
+[2026-08-23 08:59:09.092666] Config: TrainConfig(data_source='data/fineweb10B_v500', train_steps=8000, report_steps=200, seq_len=1024, val_size=2097152, batch_size=32768, mbs=32, vocab_size=500, num_layers=1, model_dim=192, train_data_pattern='fineweb_train_*.bin', val_data_pattern='fineweb_val_*.bin', seed=1337, model_type='gpt', expansion_ratio=4.0, head_dim=64, num_heads=3, embed_dim=None, num_tokens=None, zero_proj_init=False, lr_cooldown_frac=0.7, geon_eps=1e-10, geon_s_min=1e-05, geon_s_max=100000.0, checkpoint_steps=[0, 1, 10, 100, 500, 1000, 2000, 4000, 6000, 8000])
+[2026-08-23 08:59:09.092721] Rules: [Rule(name='embed', patterns=['embed.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.3, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='proj', patterns=['proj.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.003125, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='one_d', patterns=['*.bias', '*.gains'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.01, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='two_d', patterns=['blocks.*.attn.*.weight', 'blocks.*.mlp.*.weight'], start=0, end=None, update='muon', sizing='learning_rate', lr=0.02, betas=(0.9, 0.95), nesterov=False, wd_raw=0.0002, coeff=1.0, warmup_steps=0)]
+[2026-08-23 08:59:09.092753] end_step: 2000
+[2026-08-23 08:59:09.092778] ====================================================================================================
+[2026-08-23 08:59:11.940765]   [compile] trunk: 1.62s
+[2026-08-23 08:59:11.975951] loaded checkpoint experiments/exp000_muon_and_adamw/muon/seed_1337/rules.two_d.lr_0.02/checkpoints/step_2000.pt at step 2000
+[2026-08-23 08:59:11.976407] forking at step 2000 ...
+[2026-08-23 08:59:12.515953]   [branch @ step 2000] pre-fork val_loss=2.86289
+[2026-08-23 08:59:12.516223]   [branch @ step 2000] 'svdp_p025' (index=0) -> {'rules': [{'name': 'embed', 'patterns': ['embed.weight'], 'steps': [0, None], 'update': 'adamw', 'sizing': 'learning_rate', 'lr': 0.3, 'betas': [0.8, 0.95], 'nesterov': False, 'wd_raw': 0.0}, {'name': 'proj', 'patterns': ['proj.weight'], 'steps': [0, None], 'update': 'adamw', 'sizing': 'learning_rate', 'lr': 0.003125, 'betas': [0.8, 0.95], 'nesterov': False, 'wd_raw': 0.0}, {'name': 'one_d', 'patterns': ['*.bias', '*.gains'], 'steps': [0, None], 'update': 'adamw', 'sizing': 'learning_rate', 'lr': 0.01, 'betas': [0.8, 0.95], 'nesterov': False, 'wd_raw': 0.0}, {'name': 'two_d_q', 'patterns': ['blocks.*.attn.q.weight'], 'update': ['svd_pow', 0.25], 'sizing': 'kl_match', 'steps': [0, None], 'lr': 0.02, 'betas': [0.9, 0.95], 'nesterov': False, 'wd_raw': 0.0002}, {'name': 'two_d_k', 'patterns': ['blocks.*.attn.k.weight'], 'update': ['svd_pow', 0.25], 'sizing': 'kl_match', 'steps': [0, None], 'lr': 0.02, 'betas': [0.9, 0.95], 'nesterov': False, 'wd_raw': 0.0002}, {'name': 'two_d_v', 'patterns': ['blocks.*.attn.v.weight'], 'update': ['svd_pow', 0.25], 'sizing': 'kl_match', 'steps': [0, None], 'lr': 0.02, 'betas': [0.9, 0.95], 'nesterov': False, 'wd_raw': 0.0002}, {'name': 'two_d_attn_proj', 'patterns': ['blocks.*.attn.proj.weight'], 'update': ['svd_pow', 0.25], 'sizing': 'kl_match', 'steps': [0, None], 'lr': 0.02, 'betas': [0.9, 0.95], 'nesterov': False, 'wd_raw': 0.0002}, {'name': 'two_d_mlp_fc', 'patterns': ['blocks.*.mlp.fc.weight'], 'update': ['svd_pow', 0.25], 'sizing': 'kl_match', 'steps': [0, None], 'lr': 0.02, 'betas': [0.9, 0.95], 'nesterov': False, 'wd_raw': 0.0002}, {'name': 'two_d_mlp_proj', 'patterns': ['blocks.*.mlp.proj.weight'], 'update': ['svd_pow', 0.25], 'sizing': 'kl_match', 'steps': [0, None], 'lr': 0.02, 'betas': [0.9, 0.95], 'nesterov': False, 'wd_raw': 0.0002}]}
+[2026-08-23 08:59:12.536805]   [compile] svdp_p025: 0.01s
+[2026-08-23 08:59:16.526232]     [branch @ step 2000] 'svdp_p025' iter=0 applied train_loss=2.85880 kl=0.00123192 scale=1.0000 post_val_loss=2.86203
+[2026-08-23 08:59:19.947530]     [branch @ step 2000] 'svdp_p025' iter=1 applied train_loss=2.81562 kl=0.00130677 scale=1.0000 post_val_loss=2.86068
+[2026-08-23 08:59:23.371632]     [branch @ step 2000] 'svdp_p025' iter=2 applied train_loss=2.89547 kl=0.00130025 scale=1.0000 post_val_loss=2.85945
+[2026-08-23 08:59:26.796424]     [branch @ step 2000] 'svdp_p025' iter=3 applied train_loss=2.92383 kl=0.00136406 scale=1.0000 post_val_loss=2.85801
+[2026-08-23 08:59:30.223956]     [branch @ step 2000] 'svdp_p025' iter=4 applied train_loss=2.79442 kl=0.00141729 scale=1.0000 post_val_loss=2.85717
+[2026-08-23 08:59:33.721201]     [branch @ step 2000] 'svdp_p025' iter=6 applied train_loss=2.76022 kl=0.00123286 scale=1.0000 post_val_loss=2.85247
+[2026-08-23 08:59:37.220427]     [branch @ step 2000] 'svdp_p025' iter=8 applied train_loss=2.79918 kl=0.00141303 scale=1.0000 post_val_loss=2.84863
+[2026-08-23 08:59:40.719847]     [branch @ step 2000] 'svdp_p025' iter=10 applied train_loss=2.82259 kl=0.00120126 scale=1.0000 post_val_loss=2.84805
+[2026-08-23 08:59:44.219057]     [branch @ step 2000] 'svdp_p025' iter=12 applied train_loss=2.78212 kl=0.00116703 scale=1.0000 post_val_loss=2.84785
+[2026-08-23 08:59:47.716791]     [branch @ step 2000] 'svdp_p025' iter=14 applied train_loss=2.80213 kl=0.00119078 scale=1.0000 post_val_loss=2.84744
+[2026-08-23 08:59:47.804095]   [branch @ step 2000] checkpointed branches at step=2016
+[2026-08-23 08:59:51.223620]     [branch @ step 2000] 'svdp_p025' iter=16 applied train_loss=2.87220 kl=0.00131491 scale=1.0000 post_val_loss=2.84528
+[2026-08-23 08:59:54.874905]     [branch @ step 2000] 'svdp_p025' iter=20 applied train_loss=2.69450 kl=0.0017385 scale=1.0000 post_val_loss=2.84495
+[2026-08-23 08:59:58.521490]     [branch @ step 2000] 'svdp_p025' iter=24 applied train_loss=2.77136 kl=0.00278461 scale=1.0000 post_val_loss=2.84679
+[2026-08-23 09:00:02.173695]     [branch @ step 2000] 'svdp_p025' iter=28 applied train_loss=2.84325 kl=0.00135631 scale=1.0000 post_val_loss=2.85373
+[2026-08-23 09:00:05.828086]     [branch @ step 2000] 'svdp_p025' iter=32 applied train_loss=2.73857 kl=0.00135238 scale=1.0000 post_val_loss=2.85553
+[2026-08-23 09:00:09.482558]     [branch @ step 2000] 'svdp_p025' iter=36 applied train_loss=2.85095 kl=0.00139679 scale=1.0000 post_val_loss=2.86727
+[2026-08-23 09:00:13.139084]     [branch @ step 2000] 'svdp_p025' iter=40 applied train_loss=2.90189 kl=0.00191474 scale=1.0000 post_val_loss=2.86252
+[2026-08-23 09:00:16.790557]     [branch @ step 2000] 'svdp_p025' iter=44 applied train_loss=2.79713 kl=0.00133955 scale=1.0000 post_val_loss=2.85899
+[2026-08-23 09:00:20.442326]     [branch @ step 2000] 'svdp_p025' iter=48 applied train_loss=2.80750 kl=0.00147646 scale=1.0000 post_val_loss=2.85397
+[2026-08-23 09:00:24.097741]     [branch @ step 2000] 'svdp_p025' iter=52 applied train_loss=2.86245 kl=0.00142891 scale=1.0000 post_val_loss=2.84910
+[2026-08-23 09:00:27.753374]     [branch @ step 2000] 'svdp_p025' iter=56 applied train_loss=2.77348 kl=0.00130675 scale=1.0000 post_val_loss=2.85420
+[2026-08-23 09:00:31.405742]     [branch @ step 2000] 'svdp_p025' iter=60 applied train_loss=2.85763 kl=0.00132724 scale=1.0000 post_val_loss=2.85276
+[2026-08-23 09:00:31.641313]   [branch @ step 2000] checkpointed branches at step=2064
+[2026-08-23 09:00:35.064941]     [branch @ step 2000] 'svdp_p025' iter=64 applied train_loss=2.77105 kl=0.00121194 scale=1.0000 post_val_loss=2.84849
+[2026-08-23 09:00:39.017514]     [branch @ step 2000] 'svdp_p025' iter=72 applied train_loss=2.78691 kl=0.00120737 scale=1.0000 post_val_loss=2.84547
+[2026-08-23 09:00:42.970383]     [branch @ step 2000] 'svdp_p025' iter=80 applied train_loss=2.74986 kl=0.00170744 scale=1.0000 post_val_loss=2.84375
+[2026-08-23 09:00:46.923402]     [branch @ step 2000] 'svdp_p025' iter=88 applied train_loss=2.82273 kl=0.00208288 scale=1.0000 post_val_loss=2.85057
+[2026-08-23 09:00:50.875439]     [branch @ step 2000] 'svdp_p025' iter=96 applied train_loss=2.86002 kl=0.00138548 scale=1.0000 post_val_loss=2.85149
+[2026-08-23 09:00:54.827691]     [branch @ step 2000] 'svdp_p025' iter=104 applied train_loss=2.88373 kl=0.00123014 scale=1.0000 post_val_loss=2.84841
+[2026-08-23 09:00:58.779462]     [branch @ step 2000] 'svdp_p025' iter=112 applied train_loss=2.73172 kl=0.00157204 scale=1.0000 post_val_loss=2.85679
+[2026-08-23 09:01:02.731610]     [branch @ step 2000] 'svdp_p025' iter=120 applied train_loss=2.87090 kl=0.00158489 scale=1.0000 post_val_loss=2.86306
+[2026-08-23 09:01:03.266699]   [branch @ step 2000] checkpointed branches at step=2128
+[2026-08-23 09:01:06.692793]     [branch @ step 2000] 'svdp_p025' iter=128 applied train_loss=2.96971 kl=0.00148237 scale=1.0000 post_val_loss=2.86136

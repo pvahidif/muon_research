@@ -1,0 +1,33 @@
+[2026-08-23 09:24:20.405700] ====================================================================================================
+[2026-08-23 09:24:20.405809] Branching from: experiments/exp000_muon_and_adamw/muon/seed_1337/rules.two_d.lr_0.02 step=6000 branch_specs=['continue']
+[2026-08-23 09:24:20.405858] Config: TrainConfig(data_source='data/fineweb10B_v500', train_steps=8000, report_steps=200, seq_len=1024, val_size=2097152, batch_size=32768, mbs=32, vocab_size=500, num_layers=1, model_dim=192, train_data_pattern='fineweb_train_*.bin', val_data_pattern='fineweb_val_*.bin', seed=1337, model_type='gpt', expansion_ratio=4.0, head_dim=64, num_heads=3, embed_dim=None, num_tokens=None, zero_proj_init=False, lr_cooldown_frac=0.7, geon_eps=1e-10, geon_s_min=1e-05, geon_s_max=100000.0, checkpoint_steps=[0, 1, 10, 100, 500, 1000, 2000, 4000, 6000, 8000])
+[2026-08-23 09:24:20.405907] Rules: [Rule(name='embed', patterns=['embed.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.3, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='proj', patterns=['proj.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.003125, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='one_d', patterns=['*.bias', '*.gains'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.01, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='two_d', patterns=['blocks.*.attn.*.weight', 'blocks.*.mlp.*.weight'], start=0, end=None, update='muon', sizing='learning_rate', lr=0.02, betas=(0.9, 0.95), nesterov=False, wd_raw=0.0002, coeff=1.0, warmup_steps=0)]
+[2026-08-23 09:24:20.405934] end_step: 6000
+[2026-08-23 09:24:20.405961] ====================================================================================================
+[2026-08-23 09:24:20.474527]   [compile] trunk: 0.01s
+[2026-08-23 09:24:20.521884] loaded checkpoint experiments/exp000_muon_and_adamw/muon/seed_1337/rules.two_d.lr_0.02/checkpoints/step_6000.pt at step 6000
+[2026-08-23 09:24:20.522325] forking at step 6000 ...
+[2026-08-23 09:24:20.768039]   [branch @ step 6000] pre-fork val_loss=2.73898
+[2026-08-23 09:24:20.768289]   [branch @ step 6000] 'continue' (index=0) -> {'rules.two_d.update': 'muon', 'rules.two_d.sizing': 'learning_rate', 'rules.two_d.lr': 0.02, 'rules.two_d.betas': [0.9, 0.95], 'rules.two_d.nesterov': False, 'rules.two_d.wd_raw': 0.0002}
+[2026-08-23 09:24:20.786586]   [compile] continue: 0.01s
+[2026-08-23 09:24:20.794940]   [branch @ step 6000] checkpointed branches at step=6000
+[2026-08-23 09:24:21.094293]     [branch @ step 6000] 'continue' iter=0 applied train_loss=2.79998 kl=0.000326679 scale=1.0000 post_val_loss=2.74041
+[2026-08-23 09:24:21.100443]   [branch @ step 6000] checkpointed branches at step=6001
+[2026-08-23 09:24:21.403972]     [branch @ step 6000] 'continue' iter=1 applied train_loss=2.80485 kl=0.000344359 scale=1.0000 post_val_loss=2.74194
+[2026-08-23 09:24:21.410154]   [branch @ step 6000] checkpointed branches at step=6002
+[2026-08-23 09:24:21.720150]     [branch @ step 6000] 'continue' iter=2 applied train_loss=2.77089 kl=0.000314579 scale=1.0000 post_val_loss=2.74242
+[2026-08-23 09:24:21.726205]   [branch @ step 6000] checkpointed branches at step=6003
+[2026-08-23 09:24:22.028945]     [branch @ step 6000] 'continue' iter=3 applied train_loss=2.81459 kl=0.000310559 scale=1.0000 post_val_loss=2.74217
+[2026-08-23 09:24:22.034935]   [branch @ step 6000] checkpointed branches at step=6004
+[2026-08-23 09:24:22.338640]     [branch @ step 6000] 'continue' iter=4 applied train_loss=2.68197 kl=0.000304493 scale=1.0000 post_val_loss=2.74135
+[2026-08-23 09:24:22.345022]   [branch @ step 6000] checkpointed branches at step=6005
+[2026-08-23 09:24:22.651475]     [branch @ step 6000] 'continue' iter=5 applied train_loss=2.66189 kl=0.000373663 scale=1.0000 post_val_loss=2.74048
+[2026-08-23 09:24:22.659037]   [branch @ step 6000] checkpointed branches at step=6006
+[2026-08-23 09:24:22.962410]     [branch @ step 6000] 'continue' iter=6 applied train_loss=2.55006 kl=0.000395005 scale=1.0000 post_val_loss=2.73979
+[2026-08-23 09:24:22.968661]   [branch @ step 6000] checkpointed branches at step=6007
+[2026-08-23 09:24:23.271767]     [branch @ step 6000] 'continue' iter=7 applied train_loss=2.73911 kl=0.000354831 scale=1.0000 post_val_loss=2.73942
+[2026-08-23 09:24:23.278860]   [branch @ step 6000] checkpointed branches at step=6008
+[2026-08-23 09:24:23.582381]     [branch @ step 6000] 'continue' iter=8 applied train_loss=2.72275 kl=0.000392978 scale=1.0000 post_val_loss=2.73928
+[2026-08-23 09:24:23.589342]   [branch @ step 6000] checkpointed branches at step=6009
+[2026-08-23 09:24:23.892836]     [branch @ step 6000] 'continue' iter=9 applied train_loss=2.73271 kl=0.000383809 scale=1.0000 post_val_loss=2.73886
+[2026-08-23 09:24:23.898960]   [branch @ step 6000] checkpointed branches at step=6010

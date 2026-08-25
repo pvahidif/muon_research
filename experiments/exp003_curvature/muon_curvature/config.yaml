@@ -1,0 +1,37 @@
+runs:
+  - name: fork_000000
+    path: experiments/exp003_curvature/muon_continue/muon/step_000000/branches/continue
+    steps: [0]
+
+  - name: fork_000001
+    path: experiments/exp003_curvature/muon_continue/muon/step_000001/branches/continue
+    steps: [1, 2, 3]
+
+  - name: fork_000010
+    path: experiments/exp003_curvature/muon_continue/muon/step_000010/branches/continue
+    steps: [10, 11, 12, 13, 14]
+
+  - name: fork_000100
+    path: experiments/exp003_curvature/muon_continue/muon/step_000100/branches/continue
+    steps: [100, 101, 102, 103, 104, 105, 106, 107]
+
+  - name: fork_000500
+    path: experiments/exp003_curvature/muon_continue/muon/step_000500/branches/continue
+    steps: [500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510]
+
+  - name: fork_002000
+    path: experiments/exp003_curvature/muon_continue/muon/step_002000/branches/continue
+    steps: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010]
+
+  - name: fork_006000
+    path: experiments/exp003_curvature/muon_continue/muon/step_006000/branches/continue
+    steps: [6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010]
+
+profile:
+  profile_source: signal
+  profile_decomposition: svd
+  compute_gamma: true
+  compute_phi: true
+  param_name_patterns: [blocks.*.attn.v.weight, blocks.*.mlp.fc.weight]
+  profile_batch_size: 32768
+  profile_batch_resample: true

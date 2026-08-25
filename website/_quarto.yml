@@ -1,0 +1,21 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  site-url: "https://pvahidif.github.io/muon_research/"
+  title: "Pooya Vahidi Ferdowsi"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Research
+  open-graph: true
+  twitter-card: true
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    css: styles.css

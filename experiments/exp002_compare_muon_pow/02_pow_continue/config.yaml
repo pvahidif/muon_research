@@ -1,0 +1,88 @@
+__for_ref:
+  r_embed: &r_embed
+    name: embed
+    patterns: [embed.weight]
+    steps: [0, null]
+    update: adamw
+    sizing: learning_rate
+    lr: 0.3
+    betas: [0.8, 0.95]
+    nesterov: false
+    wd_raw: 0.0
+  r_proj: &r_proj
+    name: proj
+    patterns: [proj.weight]
+    steps: [0, null]
+    update: adamw
+    sizing: learning_rate
+    lr: 0.003125
+    betas: [0.8, 0.95]
+    nesterov: false
+    wd_raw: 0.0
+  r_oned: &r_oned
+    name: one_d
+    patterns: ['*.bias', '*.gains']
+    steps: [0, null]
+    update: adamw
+    sizing: learning_rate
+    lr: 0.01
+    betas: [0.8, 0.95]
+    nesterov: false
+    wd_raw: 0.0
+
+  two_d_common: &two_d_common
+    steps: [0, null]
+    lr: 0.02
+    betas: [0.9, 0.95]
+    nesterov: false
+    wd_raw: 0.0002
+
+  td_q: &td_q
+    name: two_d_q
+    patterns: [blocks.*.attn.q.weight]
+  td_k: &td_k
+    name: two_d_k
+    patterns: [blocks.*.attn.k.weight]
+  td_v: &td_v
+    name: two_d_v
+    patterns: [blocks.*.attn.v.weight]
+  td_attn_proj: &td_attn_proj
+    name: two_d_attn_proj
+    patterns: [blocks.*.attn.proj.weight]
+  td_mlp_fc: &td_mlp_fc
+    name: two_d_mlp_fc
+    patterns: [blocks.*.mlp.fc.weight]
+  td_mlp_proj: &td_mlp_proj
+    name: two_d_mlp_proj
+    patterns: [blocks.*.mlp.proj.weight]
+
+  upd_muon: &upd_muon
+    update: muon
+    sizing: learning_rate
+
+  override: &OVERRIDE
+    rules:
+      - *r_embed
+      - *r_proj
+      - *r_oned
+      - <<: [*two_d_common, *upd_muon, *td_q]
+      - <<: [*two_d_common, *upd_muon, *td_k]
+      - <<: [*two_d_common, *upd_muon, *td_v]
+      - <<: [*two_d_common, *upd_muon, *td_attn_proj]
+      - <<: [*two_d_common, *upd_muon, *td_mlp_fc]
+      - <<: [*two_d_common, *upd_muon, *td_mlp_proj]
+
+runs:
+  - name: from_p025
+    path: experiments/exp002_compare_muon_pow/02_pow_from_p025/from_p025/step_002064
+    checkpoint_step: [2128]
+    branch_names: [svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+
+  - name: from_p025
+    path: experiments/exp002_compare_muon_pow/02_pow_from_p025/from_p025/step_002128
+    checkpoint_step: [2192]
+    branch_names: [svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
