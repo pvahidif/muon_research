@@ -64,9 +64,10 @@ Pages (in order), all reading straight from the payload's own field names
    ``_pool_phi_samples``'s own docstring for why this matters), and those
    batch-mean points are what gets pooled across every step in the group,
    one point per (mode, record), paired with that mode's own ``sigma_i``.
-   A power ``p`` is fit per group from ``log|phi| ~ p*log(sigma)`` (same
-   log-log fit machinery as the pair pages above, just relabeled ``p``
-   instead of ``beta``), and ``phi/sigma^p`` is plotted (signed, linear y)
+   A power ``beta`` is fit per group from ``log|phi| ~ beta*log(sigma)``
+   (same log-log fit machinery as the pair pages above, labeled ``beta``
+   there too -- not ``p``, which already means the Muon-variant SVD power
+   elsewhere in this codebase), and ``phi/sigma^beta`` is plotted (signed, linear y)
    against ``sigma_i`` -- jittered multiplicatively (see
    ``plot_phi_ratio_page``) purely so points sharing a very close
    ``sigma_i`` (e.g. the same mode across nearby steps) don't all stack on
@@ -199,16 +200,16 @@ PAIR_SPECS: tuple[PairSpec, ...] = (
         "phi_ratio",
         kind="phi_ratio",
         help=(
-            "Include the phi_samples/sigma_i^p ratio page (needs "
-            "profile.compute_phi=true), p fit per group from "
-            "log|phi| ~ p*log(sigma) (see plot_phi_ratio_page)."
+            "Include the phi_samples/sigma_i^beta ratio page (needs "
+            "profile.compute_phi=true), beta fit per group from "
+            "log|phi| ~ beta*log(sigma) (see plot_phi_ratio_page)."
         ),
     ),
     PairSpec(
         "phi_perp_ratio",
         kind="phi_perp_ratio",
         help=(
-            "Include the phi_perp_samples/sigma_i^p ratio page (needs "
+            "Include the phi_perp_samples/sigma_i^beta ratio page (needs "
             "profile.compute_phi=true AND profile.compute_gamma=true, "
             "same recipe as --phi-ratio)."
         ),
@@ -1531,7 +1532,7 @@ def _plot_phi_ratio_panel(
     label: str,
     stat_fontsize: float = DEFAULT_STAT_FONTSIZE,
 ) -> bool:
-    """Draw one group's ``field/sigma^p`` panel into ``ax`` -- the body of
+    """Draw one group's ``field/sigma^beta`` panel into ``ax`` -- the body of
     ``plot_phi_ratio_page``'s own per-group loop, factored out so
     ``plot_phi_ratio_grid`` (several matrix/field combinations against a
     hand-picked set of groups, in one combined figure) can share it. ``rng``
@@ -1601,10 +1602,10 @@ def _plot_phi_ratio_panel(
     _declutter_log_axis(ax, "x")
     ax.set_xlim(*_log_limits(x))
     _annotate_fit_stats(
-        ax, sigma, np.abs(y_signed), fit, exponent_symbol="p", fontsize=stat_fontsize
+        ax, sigma, np.abs(y_signed), fit, exponent_symbol="β", fontsize=stat_fontsize
     )
     ax.set_xlabel(r"$\sigma_i$ (jittered)")
-    ax.set_ylabel(rf"${value_tex}/\sigma_i^p$ (clipped)")
+    ax.set_ylabel(rf"${value_tex}/\sigma_i^\beta$ (clipped)")
     ax.set_title(label, fontsize=9)
     return True
 
@@ -1669,7 +1670,7 @@ def plot_phi_ratio_grid(
         plt.close(fig)
         return None
     _finalize_figure_with_caption(
-        fig, _fit_stats_caption("p", has_fit=True), fontsize=stat_fontsize
+        fig, _fit_stats_caption("β", has_fit=True), fontsize=stat_fontsize
     )
     return fig
 
@@ -1693,9 +1694,9 @@ def plot_phi_ratio_page(
     of scatters, one panel PER GROUP, pooling one batch-mean point per
     (mode, step) of ``field`` from every step in that group (see
     ``_pool_phi_samples``, and its own docstring for why the per-example
-    samples are averaged first rather than pooled raw). A power ``p`` is
-    fit PER GROUP via ``_log_fit`` on ``log|field| ~ p*log(sigma)`` (using
-    the TRUE, unjittered ``sigma``), then ``field/sigma^p`` (kept signed)
+    samples are averaged first rather than pooled raw). A power ``beta`` is
+    fit PER GROUP via ``_log_fit`` on ``log|field| ~ beta*log(sigma)`` (using
+    the TRUE, unjittered ``sigma``), then ``field/sigma^beta`` (kept signed)
     is plotted against ``sigma`` -- jittered multiplicatively
     (``sigma * exp(N(0, jitter_scale))``, a fixed seed for reproducibility)
     purely so points sharing a very close ``sigma`` (e.g. the same mode
@@ -1708,7 +1709,7 @@ def plot_phi_ratio_page(
     ``+-quantile(|y|, 1 - RATIO_CLIP_QUANTILE)`` (smoothing runs on the
     unclipped ``y`` first, then the same bound applies to both the scatter
     and the smoothed line) so a handful of blown-up points (small ``sigma``
-    inflating ``field/sigma^p``) don't swamp the axis scale. ``value_tex``
+    inflating ``field/sigma^beta``) don't swamp the axis scale. ``value_tex``
     is the bare (no ``$`` delimiters) LaTeX for ``field``, e.g.
     ``r"\\phi_i"``. Returns ``None`` (nothing built) if no group has
     ``field`` for this matrix -- what to do with a built figure is
@@ -1723,7 +1724,7 @@ def plot_phi_ratio_page(
     caller with an unusually large group. ``scatter_downsample`` draws
     only that fraction of a group's own pooled points in the scatter (via
     ``rng``, the same one used for jitter) -- a PURELY VISUAL thinning for
-    render time/file size; the fit (``p``/``_log_fit``), the
+    render time/file size; the fit (``beta``/``_log_fit``), the
     rolling-median smoothing, the clip bound, and the annotated fit stats
     all still use every pooled point, never the downsampled subset.
 
@@ -1768,13 +1769,13 @@ def plot_phi_ratio_page(
     title_prefix = mname_label if mname_label is not None else _short_matrix_name(mname)
     fig.suptitle(
         f"{title_prefix}: "
-        rf"${value_tex}/\sigma_i^p$ vs $\sigma_i$ "
-        rf"($p$ fit per group from $\log|{value_tex}| \sim p\log\sigma_i$, "
+        rf"${value_tex}/\sigma_i^\beta$ vs $\sigma_i$ "
+        rf"($\beta$ fit per group from $\log|{value_tex}| \sim \beta\log\sigma_i$, "
         "one batch-mean point per mode per step in the group)",
         fontsize=11,
     )
     _finalize_figure_with_caption(
-        fig, _fit_stats_caption("p", has_fit=True), fontsize=stat_fontsize
+        fig, _fit_stats_caption("β", has_fit=True), fontsize=stat_fontsize
     )
     return fig
 
