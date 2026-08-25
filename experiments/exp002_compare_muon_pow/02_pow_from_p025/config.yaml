@@ -1,0 +1,128 @@
+__for_ref:
+  r_embed: &r_embed
+    name: embed
+    patterns: [embed.weight]
+    steps: [0, null]
+    update: adamw
+    sizing: learning_rate
+    lr: 0.3
+    betas: [0.8, 0.95]
+    nesterov: false
+    wd_raw: 0.0
+  r_proj: &r_proj
+    name: proj
+    patterns: [proj.weight]
+    steps: [0, null]
+    update: adamw
+    sizing: learning_rate
+    lr: 0.003125
+    betas: [0.8, 0.95]
+    nesterov: false
+    wd_raw: 0.0
+  r_oned: &r_oned
+    name: one_d
+    patterns: ['*.bias', '*.gains']
+    steps: [0, null]
+    update: adamw
+    sizing: learning_rate
+    lr: 0.01
+    betas: [0.8, 0.95]
+    nesterov: false
+    wd_raw: 0.0
+
+  two_d_common: &two_d_common
+    steps: [0, null]
+    lr: 0.02
+    betas: [0.9, 0.95]
+    nesterov: false
+    wd_raw: 0.0002
+
+  td_q: &td_q
+    name: two_d_q
+    patterns: [blocks.*.attn.q.weight]
+  td_k: &td_k
+    name: two_d_k
+    patterns: [blocks.*.attn.k.weight]
+  td_v: &td_v
+    name: two_d_v
+    patterns: [blocks.*.attn.v.weight]
+  td_attn_proj: &td_attn_proj
+    name: two_d_attn_proj
+    patterns: [blocks.*.attn.proj.weight]
+  td_mlp_fc: &td_mlp_fc
+    name: two_d_mlp_fc
+    patterns: [blocks.*.mlp.fc.weight]
+  td_mlp_proj: &td_mlp_proj
+    name: two_d_mlp_proj
+    patterns: [blocks.*.mlp.proj.weight]
+
+  upd_m025: &upd_m025
+    update: [svd_pow, -0.25]
+    sizing: kl_match
+  upd_z000: &upd_z000
+    update: [svd_pow, 0.0]
+    sizing: kl_match
+  upd_p025: &upd_p025
+    update: [svd_pow, 0.25]
+    sizing: kl_match
+
+  idp_m025: &idp_m025
+    rules:
+      - *r_embed
+      - *r_proj
+      - *r_oned
+      - <<: [*two_d_common, *upd_m025, *td_q]
+      - <<: [*two_d_common, *upd_m025, *td_k]
+      - <<: [*two_d_common, *upd_m025, *td_v]
+      - <<: [*two_d_common, *upd_m025, *td_attn_proj]
+      - <<: [*two_d_common, *upd_m025, *td_mlp_fc]
+      - <<: [*two_d_common, *upd_m025, *td_mlp_proj]
+  idp_z000: &idp_z000
+    rules:
+      - *r_embed
+      - *r_proj
+      - *r_oned
+      - <<: [*two_d_common, *upd_z000, *td_q]
+      - <<: [*two_d_common, *upd_z000, *td_k]
+      - <<: [*two_d_common, *upd_z000, *td_v]
+      - <<: [*two_d_common, *upd_z000, *td_attn_proj]
+      - <<: [*two_d_common, *upd_z000, *td_mlp_fc]
+      - <<: [*two_d_common, *upd_z000, *td_mlp_proj]
+  idp_p025: &idp_p025
+    rules:
+      - *r_embed
+      - *r_proj
+      - *r_oned
+      - <<: [*two_d_common, *upd_p025, *td_q]
+      - <<: [*two_d_common, *upd_p025, *td_k]
+      - <<: [*two_d_common, *upd_p025, *td_v]
+      - <<: [*two_d_common, *upd_p025, *td_attn_proj]
+      - <<: [*two_d_common, *upd_p025, *td_mlp_fc]
+      - <<: [*two_d_common, *upd_p025, *td_mlp_proj]
+
+runs:
+  - name: from_p025
+    path: experiments/exp002_compare_muon_pow/02_p025_run/muon/step_002000/branches/svdp_p025
+    steps: [2064, 2128]
+    prefork_steps: 0
+    fork_steps: 65
+    checkpoint_after_steps: [16, 64]
+    branch_specs:
+      - {name: svdp_m025, override: *idp_m025, kl_matched: false}
+      - {name: svdp_z000, override: *idp_z000, kl_matched: false}
+      - {name: svdp_p025, override: *idp_p025, kl_matched: false}
+
+branch_config:
+  prefork_steps: 0
+  fork_steps: 500
+  metric_schedule: &schedule
+    _type: schedule
+    schedule:
+      - [0, 4, 1]
+      - [4, 16, 2]
+      - [16, 64, 4]
+      - [64, 256, 8]
+      - [256, 1024, 16]
+      - [1024, 8192, 64]
+  klmatch_schedule: *schedule
+  shared_patterns: [embed.weight, proj.weight, '*.bias', '*.gains']

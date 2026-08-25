@@ -1,0 +1,64 @@
+[2026-08-23 04:07:51.235025] ====================================================================================================
+[2026-08-23 04:07:51.235099] Branching from: experiments/exp000_muon_and_adamw/adamw/seed_1337/rules.two_d.lr_0.003 step=500 branch_specs=['adamw', 'muon']
+[2026-08-23 04:07:51.235148] Config: TrainConfig(data_source='data/fineweb10B_v500', train_steps=12000, report_steps=200, seq_len=1024, val_size=2097152, batch_size=32768, mbs=32, vocab_size=500, num_layers=1, model_dim=192, train_data_pattern='fineweb_train_*.bin', val_data_pattern='fineweb_val_*.bin', seed=1337, model_type='gpt', expansion_ratio=4.0, head_dim=64, num_heads=3, embed_dim=None, num_tokens=None, zero_proj_init=False, lr_cooldown_frac=0.7, geon_eps=1e-10, geon_s_min=1e-05, geon_s_max=100000.0, checkpoint_steps=[0, 1, 10, 50, 100, 200, 500, 1000, 2000, 4000, 6000, 8000, 10000, 12000])
+[2026-08-23 04:07:51.235194] Rules: [Rule(name='embed', patterns=['embed.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.3, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='proj', patterns=['proj.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.003125, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='one_d', patterns=['*.bias', '*.gains'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.01, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='two_d', patterns=['blocks.*.attn.*.weight', 'blocks.*.mlp.*.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.003, betas=(0.9, 0.95), nesterov=False, wd_raw=0.0002, coeff=1.0, warmup_steps=40)]
+[2026-08-23 04:07:51.235222] end_step: 500
+[2026-08-23 04:07:51.235252] ====================================================================================================
+[2026-08-23 04:07:51.313253]   [compile] trunk: 0.01s
+[2026-08-23 04:07:51.362952] loaded checkpoint experiments/exp000_muon_and_adamw/adamw/seed_1337/rules.two_d.lr_0.003/checkpoints/step_500.pt at step 500
+[2026-08-23 04:07:51.363415] forking at step 500 ...
+[2026-08-23 04:07:51.617514]   [branch @ step 500] pre-fork val_loss=3.07811
+[2026-08-23 04:07:51.617814]   [branch @ step 500] 'adamw' (index=0) -> {'rules.two_d.update': 'adamw', 'rules.two_d.sizing': 'learning_rate', 'rules.two_d.lr': 0.003, 'rules.two_d.betas': [0.9, 0.95], 'rules.two_d.nesterov': False, 'rules.two_d.wd_raw': 0.0002}
+[2026-08-23 04:07:51.638300]   [compile] adamw: 0.01s
+[2026-08-23 04:07:51.640759]   [branch @ step 500] 'muon' (index=1, kl_matched) -> {'rules.two_d.update': 'muon', 'rules.two_d.sizing': 'learning_rate', 'rules.two_d.lr': 0.02, 'rules.two_d.betas': [0.9, 0.95], 'rules.two_d.nesterov': False, 'rules.two_d.wd_raw': 0.0002}
+[2026-08-23 04:07:51.659929]   [compile] muon: 0.01s
+[2026-08-23 04:07:51.970540]     [branch @ step 500] 'adamw' iter=0 applied train_loss=3.05338 kl=0.00384093 scale=1.0000 post_val_loss=3.07822
+[2026-08-23 04:07:52.763075]     [branch @ step 500] 'muon' iter=0 applied train_loss=3.05338 kl=0.00383992 scale=0.8142 post_val_loss=3.07766
+[2026-08-23 04:07:52.776191]   [branch @ step 500] checkpointed branches at step=501
+[2026-08-23 04:07:53.086157]     [branch @ step 500] 'adamw' iter=1 applied train_loss=3.10429 kl=0.00407518 scale=1.0000 post_val_loss=3.07773
+[2026-08-23 04:07:53.878652]     [branch @ step 500] 'muon' iter=1 applied train_loss=3.10342 kl=0.00407574 scale=0.8591 post_val_loss=3.07752
+[2026-08-23 04:07:54.196747]     [branch @ step 500] 'adamw' iter=2 applied train_loss=3.09379 kl=0.00388934 scale=1.0000 post_val_loss=3.07938
+[2026-08-23 04:07:54.987661]     [branch @ step 500] 'muon' iter=2 applied train_loss=3.09365 kl=0.00388495 scale=0.8433 post_val_loss=3.07943
+[2026-08-23 04:07:55.306982]     [branch @ step 500] 'adamw' iter=3 applied train_loss=3.03689 kl=0.00299619 scale=1.0000 post_val_loss=3.07521
+[2026-08-23 04:07:56.097696]     [branch @ step 500] 'muon' iter=3 applied train_loss=3.03598 kl=0.0029938 scale=0.8559 post_val_loss=3.07903
+[2026-08-23 04:07:56.110615]   [branch @ step 500] checkpointed branches at step=504
+[2026-08-23 04:07:56.425118]     [branch @ step 500] 'adamw' iter=4 applied train_loss=3.03775 kl=0.00718066 scale=1.0000 post_val_loss=3.07674
+[2026-08-23 04:07:57.216433]     [branch @ step 500] 'muon' iter=4 applied train_loss=3.04153 kl=0.00718005 scale=1.0248 post_val_loss=3.08110
+[2026-08-23 04:07:57.597350]     [branch @ step 500] 'adamw' iter=6 applied train_loss=3.09049 kl=0.00308127 scale=1.0000 post_val_loss=3.07736
+[2026-08-23 04:07:58.388920]     [branch @ step 500] 'muon' iter=6 applied train_loss=3.10056 kl=0.00308079 scale=0.8495 post_val_loss=3.08495
+[2026-08-23 04:07:58.769720]     [branch @ step 500] 'adamw' iter=8 applied train_loss=3.15804 kl=0.00683364 scale=1.0000 post_val_loss=3.07776
+[2026-08-23 04:07:59.562874]     [branch @ step 500] 'muon' iter=8 applied train_loss=3.16337 kl=0.00683207 scale=0.9349 post_val_loss=3.08537
+[2026-08-23 04:07:59.942941]     [branch @ step 500] 'adamw' iter=10 applied train_loss=3.05758 kl=0.00282748 scale=1.0000 post_val_loss=3.08089
+[2026-08-23 04:08:00.735439]     [branch @ step 500] 'muon' iter=10 applied train_loss=3.06321 kl=0.00282718 scale=0.7876 post_val_loss=3.09056
+[2026-08-23 04:08:01.115306]     [branch @ step 500] 'adamw' iter=12 applied train_loss=3.10340 kl=0.00276155 scale=1.0000 post_val_loss=3.08575
+[2026-08-23 04:08:01.907194]     [branch @ step 500] 'muon' iter=12 applied train_loss=3.11000 kl=0.00276104 scale=0.8278 post_val_loss=3.09207
+[2026-08-23 04:08:02.287123]     [branch @ step 500] 'adamw' iter=14 applied train_loss=3.11591 kl=0.0031947 scale=1.0000 post_val_loss=3.07816
+[2026-08-23 04:08:03.080675]     [branch @ step 500] 'muon' iter=14 applied train_loss=3.12242 kl=0.00319415 scale=0.8960 post_val_loss=3.08269
+[2026-08-23 04:08:03.158278]   [branch @ step 500] checkpointed branches at step=516
+[2026-08-23 04:08:03.469075]     [branch @ step 500] 'adamw' iter=16 applied train_loss=3.09121 kl=0.00265475 scale=1.0000 post_val_loss=3.06591
+[2026-08-23 04:08:04.262822]     [branch @ step 500] 'muon' iter=16 applied train_loss=3.09888 kl=0.0026556 scale=0.7929 post_val_loss=3.07498
+[2026-08-23 04:08:04.766902]     [branch @ step 500] 'adamw' iter=20 applied train_loss=3.14522 kl=0.00335343 scale=1.0000 post_val_loss=3.06780
+[2026-08-23 04:08:05.558196]     [branch @ step 500] 'muon' iter=20 applied train_loss=3.15320 kl=0.00335217 scale=0.8509 post_val_loss=3.07410
+[2026-08-23 04:08:06.063884]     [branch @ step 500] 'adamw' iter=24 applied train_loss=3.11076 kl=0.00366986 scale=1.0000 post_val_loss=3.07888
+[2026-08-23 04:08:06.853899]     [branch @ step 500] 'muon' iter=24 applied train_loss=3.11834 kl=0.00366644 scale=0.9044 post_val_loss=3.08535
+[2026-08-23 04:08:07.359719]     [branch @ step 500] 'adamw' iter=28 applied train_loss=3.05025 kl=0.00336959 scale=1.0000 post_val_loss=3.06891
+[2026-08-23 04:08:08.158678]     [branch @ step 500] 'muon' iter=28 applied train_loss=3.05748 kl=0.00336943 scale=0.8998 post_val_loss=3.07649
+[2026-08-23 04:08:08.662364]     [branch @ step 500] 'adamw' iter=32 applied train_loss=3.09348 kl=0.00298452 scale=1.0000 post_val_loss=3.05672
+[2026-08-23 04:08:09.454863]     [branch @ step 500] 'muon' iter=32 applied train_loss=3.10492 kl=0.00298368 scale=0.8550 post_val_loss=3.06814
+[2026-08-23 04:08:09.959879]     [branch @ step 500] 'adamw' iter=36 applied train_loss=3.02365 kl=0.00262241 scale=1.0000 post_val_loss=3.05696
+[2026-08-23 04:08:10.751028]     [branch @ step 500] 'muon' iter=36 applied train_loss=3.03102 kl=0.00262311 scale=0.8280 post_val_loss=3.06466
+[2026-08-23 04:08:11.256677]     [branch @ step 500] 'adamw' iter=40 applied train_loss=3.00860 kl=0.00336345 scale=1.0000 post_val_loss=3.04750
+[2026-08-23 04:08:12.049300]     [branch @ step 500] 'muon' iter=40 applied train_loss=3.01890 kl=0.00336259 scale=0.8564 post_val_loss=3.05479
+[2026-08-23 04:08:12.553816]     [branch @ step 500] 'adamw' iter=44 applied train_loss=3.02280 kl=0.00420374 scale=1.0000 post_val_loss=3.05771
+[2026-08-23 04:08:13.347304]     [branch @ step 500] 'muon' iter=44 applied train_loss=3.02512 kl=0.00420433 scale=0.9578 post_val_loss=3.06140
+[2026-08-23 04:08:13.850037]     [branch @ step 500] 'adamw' iter=48 applied train_loss=2.93200 kl=0.00464669 scale=1.0000 post_val_loss=3.05360
+[2026-08-23 04:08:14.642350]     [branch @ step 500] 'muon' iter=48 applied train_loss=2.94009 kl=0.00464793 scale=1.0054 post_val_loss=3.06054
+[2026-08-23 04:08:15.149106]     [branch @ step 500] 'adamw' iter=52 applied train_loss=2.95066 kl=0.00252839 scale=1.0000 post_val_loss=3.05269
+[2026-08-23 04:08:15.941612]     [branch @ step 500] 'muon' iter=52 applied train_loss=2.96272 kl=0.00252869 scale=0.8151 post_val_loss=3.06218
+[2026-08-23 04:08:16.446366]     [branch @ step 500] 'adamw' iter=56 applied train_loss=3.22849 kl=0.00492969 scale=1.0000 post_val_loss=3.05306
+[2026-08-23 04:08:17.240015]     [branch @ step 500] 'muon' iter=56 applied train_loss=3.22395 kl=0.00492823 scale=1.0334 post_val_loss=3.05826
+[2026-08-23 04:08:17.745287]     [branch @ step 500] 'adamw' iter=60 applied train_loss=2.96090 kl=0.00444335 scale=1.0000 post_val_loss=3.06054
+[2026-08-23 04:08:18.539222]     [branch @ step 500] 'muon' iter=60 applied train_loss=2.97343 kl=0.00444234 scale=0.9597 post_val_loss=3.07026
+[2026-08-23 04:08:18.741803]   [branch @ step 500] checkpointed branches at step=564
+[2026-08-23 04:08:19.053633]     [branch @ step 500] 'adamw' iter=64 applied train_loss=2.84805 kl=0.00314292 scale=1.0000 post_val_loss=3.05818
+[2026-08-23 04:08:19.846842]     [branch @ step 500] 'muon' iter=64 applied train_loss=2.85659 kl=0.00314257 scale=0.8863 post_val_loss=3.06814

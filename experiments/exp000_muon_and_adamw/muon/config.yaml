@@ -1,0 +1,70 @@
+train:
+  data_source: data/fineweb10B_v500
+  # train
+  train_steps: 8000
+  report_steps: 200
+  checkpoint_steps: [0, 1, 10, 100, 500, 1000, 2000, 4000, 6000, 8000]
+  seq_len: 1024
+  val_size: 2097152 # 2 * 1024 * 1024
+  batch_size: 32768 # 32 * 1024
+  mbs: 32
+  # model
+  model_type: "gpt"
+  vocab_size: 500
+  num_layers: 1
+  model_dim: 192
+  head_dim: 64
+  num_heads: 3
+  expansion_ratio: 4.0
+  # optim (global schedule only -- everything per-param now lives in 'rules')
+  lr_cooldown_frac: 0.7
+  zero_proj_init: false
+
+# same optimizer setup run_geon_curv_profile.py built for this model
+# (model_type: gpl, optim: muon -- embed/proj/1D always adamw, the 2D block
+# weights + embed_proj.weight on muon), just expressed as explicit rules and
+# with no profiling.
+rules:
+  - name: embed
+    patterns: ["embed.weight"]
+    steps: [0, null]
+    update: adamw
+    sizing: learning_rate
+    lr: 0.3
+    betas: [0.8, 0.95]
+    nesterov: false
+    wd_raw: 0.0
+
+  - name: proj
+    patterns: ["proj.weight"]
+    steps: [0, null]
+    update: adamw
+    sizing: learning_rate
+    lr: 0.003125
+    betas: [0.8, 0.95]
+    nesterov: false
+    wd_raw: 0.0
+
+  - name: one_d
+    patterns: ["*.bias", "*.gains"]
+    steps: [0, null]
+    update: adamw
+    sizing: learning_rate
+    lr: 0.01
+    betas: [0.8, 0.95]
+    nesterov: false
+    wd_raw: 0.0
+
+  - name: two_d
+    patterns: ["blocks.*.attn.*.weight", "blocks.*.mlp.*.weight"]
+    steps: [0, null]
+    update: muon
+    sizing: learning_rate
+    lr: 0.02
+    betas: [0.9, 0.95]
+    nesterov: false
+    wd_raw: 0.0002
+
+override_args:
+  - seed: [1337]
+    rules.two_d.lr: [0.005, 0.01, 0.02, 0.04, 0.08]
