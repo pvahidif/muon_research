@@ -181,7 +181,10 @@ window.Quarto = {
   <li><a href="#cross-mode-curvature-coupling-is-weak" id="toc-cross-mode-curvature-coupling-is-weak" class="nav-link" data-scroll-target="#cross-mode-curvature-coupling-is-weak">Cross-mode curvature coupling is weak</a></li>
   <li><a href="#larger-singular-modes-also-carry-more-held-out-gradient-signal" id="toc-larger-singular-modes-also-carry-more-held-out-gradient-signal" class="nav-link" data-scroll-target="#larger-singular-modes-also-carry-more-held-out-gradient-signal">Larger singular modes also carry more held-out gradient signal</a></li>
   </ul></li>
-  <li><a href="#sec-aspectRatio" id="toc-sec-aspectRatio" class="nav-link" data-scroll-target="#sec-aspectRatio">Aspect ratio organizes the curvature law</a></li>
+  <li><a href="#sec-aspectRatio" id="toc-sec-aspectRatio" class="nav-link" data-scroll-target="#sec-aspectRatio">Aspect ratio organizes the curvature law</a>
+  <ul>
+  <li><a href="#a-possible-local-explanation" id="toc-a-possible-local-explanation" class="nav-link" data-scroll-target="#a-possible-local-explanation">A possible local explanation</a></li>
+  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
   </ul>
@@ -272,7 +275,7 @@ H[D_i]
 </section>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Muon can converge substantially faster than AdamW in language-model training, but it is still not clear why. Its defining operation is surprisingly simple. For each matrix-valued update, Muon keeps the singular modes of the momentum signal and replaces its singular values with equal weights. Why should flattening the spectrum help optimization?</p>
+<p>Muon can converge substantially faster than AdamW in language-model training, including in large-scale scaling studies such as <a href="https://arxiv.org/abs/2502.16982">Muon is Scalable for LLM Training</a>, but it is still not clear why. Its defining operation is surprisingly simple. For each matrix-valued update, Muon keeps the singular modes of the momentum signal and replaces its singular values with equal weights. There is already a clean one-step interpretation of this polar direction. For a matrix gradient <span class="math inline">\(G=U\Sigma V^\top\)</span>, <a href="https://arxiv.org/abs/2409.20325">Old Optimizer, New Norm: An Anthology</a> shows that <span class="math inline">\(UV^\top\)</span> is the steepest-descent direction when update size is measured by the spectral norm. That makes spectral flattening a principled local choice under that geometry. It does not answer the question we study here: why can this choice improve the later optimization trajectory, and when can a different spectral weighting leave a better parameter state?</p>
 <p>We study this question using deliberately small transformers, where controlled optimizer interventions and direct measurements of local geometry are affordable. The goal is not to benchmark large-scale language-model training. It is to make the optimization dynamics simple enough to inspect directly.</p>
 <p>The experiments below approach the question from two sides. We first intervene on the optimizer and ask how short changes in the update rule affect future optimization. We then look inside Muon’s singular modes and measure the local curvature and gradient structure that the spectral update is acting on. The full experimental setup appears in <a href="#sec-setting" class="quarto-xref">Section&nbsp;4</a>.</p>
 <p>The code and experiment configurations for this study are available at <a href="https://github.com/pvahidif/muon_research">this repository</a>, with the configurations for each experiment under <code>experiments/</code>. The only exception is the large aspect-ratio sweep in <a href="#sec-aspectRatio" class="quarto-xref">Section&nbsp;7</a>, which was run in a separate repository.</p>
@@ -296,6 +299,7 @@ Figure&nbsp;2: Muon-minus-AdamW validation loss after forking from an AdamW chec
 <p>This is the first important result. Switching to Muon can make the model worse for hundreds of steps before it makes it better. If Muon won because each individual step reduced the loss more, this should not happen. The Muon branch should improve as soon as the optimizer is switched.</p>
 <p>The delay is already substantial before the learning-rate decay begins. After 1000 AdamW steps, Muon needs about 320 steps to catch up, and after 2000 steps it needs about 608. At still later forks the catch-up length becomes even larger, although those comparisons are also affected by the decaying learning rate.</p>
 <p>We will use the term continuation value for this delayed effect. The continuation value of an update is the effect it has on the parameter state seen by later optimization steps. An update can therefore look bad immediately and still have high continuation value if it leaves the model in a state from which subsequent optimization is more effective.</p>
+<p>This idea has a close precedent in <a href="https://arxiv.org/abs/2002.09572">The Break-Even Point on Optimization Trajectories of Deep Neural Networks</a>, which shows that early SGD hyperparameters can change the curvature and gradient-noise regime encountered later in training, with some benefits becoming visible only after a break-even point. Our experiment asks a narrower counterfactual question: after a short optimizer intervention, how useful is the resulting parameter state when both branches are judged by later optimization?</p>
 <p>The catch-up curves suggest that Muon’s advantage is largely about continuation value. Muon appears to move the parameters toward states from which future optimization is more effective. But there is an important alternative explanation. Perhaps those states are only useful if Muon keeps optimizing them. Or perhaps the effect lives in Muon’s optimizer state rather than in the parameters themselves. The next experiment separates these possibilities.</p>
 <section id="does-muon-leave-better-parameter-states" class="level3">
 <h3 class="anchored" data-anchor-id="does-muon-leave-better-parameter-states">Does Muon leave better parameter states?</h3>
@@ -333,7 +337,7 @@ Figure&nbsp;3: Validation-loss diff relative to continued AdamW after switching 
 <p><span class="math display">\[
 \sqrt{\max(1,r/c)},
 \]</span></p>
-<p>where <span class="math inline">\(r\)</span> and <span class="math inline">\(c\)</span> are the output and input dimensions of the matrix. All other parameter groups, the data order, the training schedule, and the random seed are held fixed. Weight decay is applied independently of the learning rate. This is intentional: because AdamW and Muon use different tuned learning rates, coupling weight decay to the learning rate would also change the effective regularization strength between the two optimizers.</p>
+<p>where <span class="math inline">\(r\)</span> and <span class="math inline">\(c\)</span> are the output and input dimensions of the matrix. All other parameter groups, the data order, the training schedule, and the random seed are held fixed. Large-scale Muon work has found both weight decay and per-parameter update-scale calibration important for stable scaling, as discussed in <a href="https://arxiv.org/abs/2502.16982">Muon is Scalable for LLM Training</a>. Our convention here is not meant to reproduce that large-scale recipe. Weight decay is applied independently of the learning rate so that the effective regularization strength is not changed simply because AdamW and Muon use different tuned learning rates.</p>
 <section id="learning-rate-calibration" class="level3">
 <h3 class="anchored" data-anchor-id="learning-rate-calibration">Learning-rate calibration</h3>
 <p>Before the main comparisons, we tune the 2D-weight learning rate separately for AdamW and Muon while keeping everything else fixed. For Muon, we sweep learning rates in <span class="math inline">\(\{0.005, 0.01, 0.02, 0.04, 0.08\}\)</span> for 8000 steps. For AdamW, we sweep <span class="math inline">\(\{0.00075, 0.0015, 0.003, 0.006, 0.012\}\)</span> for 12000 steps.</p>
@@ -738,6 +742,70 @@ Figure&nbsp;14: How the fitted relationship between curvature magnitude <span cl
 <p>The exact square-matrix behavior still depends on model width, and this sweep only profiles the MLP up-projection. So the experiment does not show that matrix role never matters. What it does show is that aspect ratio has a strong and reproducible effect on the geometry of the singular modes.</p>
 <p>This gives the earlier attention-versus-MLP difference a simpler interpretation. Their singular spectra were not only coming from different parts of the network. They were also probing different matrix shapes.</p>
 <p>More broadly, a singular value does not have one universal geometric meaning across all weight matrices. The curvature associated with the singular modes depends strongly on the shape of the matrix they belong to. That matters for Muon because the same spectral rule is applied across matrices with very different shapes. Any attempt to improve that spectral weighting may therefore need to account for aspect ratio as part of the local geometry.</p>
+<section id="a-possible-local-explanation" class="level3">
+<h3 class="anchored" data-anchor-id="a-possible-local-explanation">A possible local explanation</h3>
+<p>The approximately quadratic law above may have a fairly mechanical explanation. Consider one singular mode</p>
+<p><span class="math display">\[
+D_i=u_iv_i^\top
+\]</span></p>
+<p>and let <span class="math inline">\(x_n\)</span> be the input to this weight matrix on example <span class="math inline">\(n\)</span>. If <span class="math inline">\(\delta_n\)</span> is the gradient with respect to the layer output and <span class="math inline">\(A_n\)</span> is the Hessian with respect to that output, then the linearity of the map <span class="math inline">\(W\mapsto Wx_n\)</span> gives</p>
+<p><span class="math display">\[
+\phi_i
+=
+\mathbb E_n
+\left[
+(v_i^\top x_n)(u_i^\top\delta_n)
+\right],
+\]</span></p>
+<p>while</p>
+<p><span class="math display">\[
+\gamma_{ii}
+=
+\mathbb E_n
+\left[
+(v_i^\top x_n)^2
+(u_i^\top A_nu_i)
+\right].
+\]</span></p>
+<p>The input coordinate along <span class="math inline">\(v_i\)</span> therefore enters the gradient alignment once and the curvature twice.</p>
+<p>A <a href="https://arxiv.org/abs/1503.05671">K-FAC</a>-style approximation makes this more explicit. If the input-side and output-side factors approximately separate,</p>
+<p><span class="math display">\[
+\gamma_{ii}
+\approx
+(v_i^\top\Sigma_xv_i)
+(u_i^\top\bar A u_i).
+\]</span></p>
+<p>Similarly, <span class="math inline">\(|\phi_i|^2\)</span> contains the same input factor <span class="math inline">\(v_i^\top\Sigma_xv_i\)</span>, multiplied by output-side gradient and correlation factors. If those output-side quantities vary relatively little across modes, then</p>
+<p><span class="math display">\[
+|\gamma_{ii}|
+\propto
+|\phi_i|^2.
+\]</span></p>
+<p>For the rectangular MLP matrices we also observe approximately <span class="math inline">\(|\phi_i|\propto\sigma_i\)</span>. Together, these give</p>
+<p><span class="math display">\[
+|\gamma_{ii}|
+\propto
+\sigma_i^2.
+\]</span></p>
+<p>One possible reason this approximation becomes cleaner at large aspect ratio is that the <span class="math inline">\(v_i\)</span> can probe a wide range of input-side variances while the corresponding output-side quadratic forms vary less across the <span class="math inline">\(u_i\)</span>. This would make the input-side factor increasingly dominant as the matrix becomes more rectangular. We treat this as a hypothesis rather than an explanation established by the experiments above.</p>
+<p>This picture also gives a simple local interpretation of Muon’s <span class="math inline">\(p=0\)</span> choice. Away from the earliest negative-curvature regime, consider weighting each mode by square-root curvature,</p>
+<p><span class="math display">\[
+a_i
+\propto
+\frac{\phi_i}{\sqrt{\gamma_{ii}}}.
+\]</span></p>
+<p>This is not a Newton step, which would use <span class="math inline">\(\gamma_{ii}^{-1}\)</span>. It is a square-root curvature preconditioner, analogous in spirit to the coordinatewise <span class="math inline">\(m/\sqrt{v}\)</span> normalization used by Adam and AdamW, and to <a href="https://arxiv.org/abs/1802.09568">Shampoo</a>, which applies inverse matrix roots to structured second-moment preconditioners. If</p>
+<p><span class="math display">\[
+|\phi_i|\propto\sigma_i,
+\qquad
+\gamma_{ii}\propto\sigma_i^2,
+\]</span></p>
+<p>then the resulting mode weights have approximately constant magnitude. If the gradient and momentum are also aligned in sign on these modes, this gives a Muon-like flattened spectrum,</p>
+<p><span class="math display">\[
+D_0=UV^\top.
+\]</span></p>
+<p>This gives a second one-step reason that <span class="math inline">\(p=0\)</span> can be natural, complementary to the spectral-norm steepest-descent interpretation from the introduction. But the experiments earlier in this post are exactly why we do not want to stop at a one-step explanation. The best spectral weighting in our interventions depends on both the parameter state and the continuation horizon. The argument above is local and static. In Part II, we want to test its assumptions more directly and then ask how quantities such as <span class="math inline">\(\phi_i\)</span> evolve after an update. The eventual goal is to choose spectral weights with the next <span class="math inline">\(K\)</span> optimization steps in mind, rather than only the immediate local step.</p>
+</section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
@@ -753,8 +821,8 @@ U\Sigma^pV^\top
 <p><strong>3. The singular modes that Muon reweights have structured local geometry.</strong></p>
 <p>Large-<span class="math inline">\(\sigma_i\)</span> modes tend to have greater curvature along their own directions and stronger held-out gradient alignment. Different singular modes are only weakly coupled to one another inside their shared span after the earliest stage of training. The remaining Hessian response points outside that span through the residual directions <span class="math inline">\(Q_i\)</span>. These directions carry little systematic gradient signal but often live at a much higher curvature scale, which motivates treating them as a noise-like part of the local response.</p>
 <p>The structured curvature relationship also depends strongly on matrix aspect ratio. As matrices become more rectangular, the relationship between <span class="math inline">\(|\gamma_{ii}|\)</span> and <span class="math inline">\(\sigma_i\)</span> becomes much tighter and approaches an approximately quadratic scaling.</p>
-<p>These results fit together, but one important link is still missing. The geometry gives a concrete reason that changing the spectral weighting should matter, and it shows that different parts of the spectrum correspond to systematically different local conditions. We have not yet shown that these measurements predict which value of <span class="math inline">\(p\)</span> will have the best continuation value at a particular parameter state or continuation horizon.</p>
-<p>That missing link is the next question. The measurements in this post are mostly local and static, while continuation value is inherently dynamic. In Part II, we plan to model how gradient signal evolves across these singular modes during training. The goal is to ask whether that dynamics can tell us how to weight the modes for the next <span class="math inline">\(K\)</span> optimization steps, rather than only for the next step. If it can, continuation value becomes more than an empirical observation. It becomes a possible design objective for the optimizer itself.</p>
+<p>Under simple factorization assumptions, that quadratic scaling has a natural local interpretation: square-root curvature preconditioning would approximately flatten the singular spectrum, recovering a Muon-like <span class="math inline">\(p=0\)</span> weighting. This gives a candidate explanation for why Muon’s spectral rule can be locally sensible, but it does not tell us which weighting has the best continuation value.</p>
+<p>That is the missing dynamic link. The measurements in this post are mostly local and static, while continuation value is inherently multi-step. Related work on <a href="https://arxiv.org/abs/2410.24206">Understanding Optimization in Deep Learning with Central Flows</a> shows that time-averaged optimizer dynamics can explain long-horizon behavior that is not captured by immediate descent, including an implicit interaction between optimization and curvature. Our question is more specific: can an analogous dynamic description be built in Muon’s singular-mode basis, and can it predict which spectral weighting has the best continuation value? In Part II, we plan to test the assumptions behind the local picture above and model how gradient signal evolves across the singular modes after an update. The goal is to ask whether those dynamics can tell us how to weight the modes for the next <span class="math inline">\(K\)</span> optimization steps, rather than only for the next step.</p>
 </section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
