@@ -25,6 +25,36 @@ runs:
       - {name: adamw, override: *id_adamw, kl_matched: false}
       - {name: muon, override: *id_muon, kl_matched: true}
 
+  - name: adamw_seed1338
+    path: experiments/exp000_muon_and_adamw/adamw/seed_1338/rules.two_d.lr_0.003
+    steps: [10, 100, 200, 500, 1000]
+    prefork_steps: 0
+    fork_steps: 65
+    checkpoint_after_steps: [1, 4, 16, 64]
+    branch_specs:
+      - {name: adamw, override: *id_adamw, kl_matched: false}
+      - {name: muon, override: *id_muon, kl_matched: true}
+
+  - name: adamw_seed1339
+    path: experiments/exp000_muon_and_adamw/adamw/seed_1339/rules.two_d.lr_0.003
+    steps: [10, 100, 200, 500, 1000]
+    prefork_steps: 0
+    fork_steps: 65
+    checkpoint_after_steps: [1, 4, 16, 64]
+    branch_specs:
+      - {name: adamw, override: *id_adamw, kl_matched: false}
+      - {name: muon, override: *id_muon, kl_matched: true}
+
+  - name: adamw_seed1340
+    path: experiments/exp000_muon_and_adamw/adamw/seed_1340/rules.two_d.lr_0.003
+    steps: [10, 100, 200, 500, 1000]
+    prefork_steps: 0
+    fork_steps: 65
+    checkpoint_after_steps: [1, 4, 16, 64]
+    branch_specs:
+      - {name: adamw, override: *id_adamw, kl_matched: false}
+      - {name: muon, override: *id_muon, kl_matched: true}
+
 branch_config:
   prefork_steps: 0
   fork_steps: 500

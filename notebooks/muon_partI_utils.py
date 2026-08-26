@@ -149,6 +149,7 @@ def plot_power_reunification_grid(df_full, base_branch, *, transpose=False):
                 y="diff",
                 hue="branch_power_label",
                 hue_order=hue_order,
+                errorbar=("pi", 100),
                 palette=palette,
                 linewidth=1.0,
                 ax=ax,

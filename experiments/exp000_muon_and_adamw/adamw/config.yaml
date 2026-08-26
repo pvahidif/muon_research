@@ -69,3 +69,6 @@ rules:
 override_args:
   - seed: [1337]
     rules.two_d.lr: [0.00075, 0.0015, 0.003, 0.006, 0.012]
+
+  - seed: [1338, 1339, 1340]
+    rules.two_d.lr: [0.003]

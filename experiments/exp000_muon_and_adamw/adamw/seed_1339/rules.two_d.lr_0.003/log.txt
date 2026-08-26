@@ -1,0 +1,87 @@
+[2026-08-26 00:58:29.474386] ====================================================================================================
+[2026-08-26 00:58:29.474778] Config: TrainConfig(data_source='data/fineweb10B_v500', train_steps=12000, report_steps=200, seq_len=1024, val_size=2097152, batch_size=32768, mbs=32, vocab_size=500, num_layers=1, model_dim=192, train_data_pattern='fineweb_train_*.bin', val_data_pattern='fineweb_val_*.bin', seed=1339, model_type='gpt', expansion_ratio=4.0, head_dim=64, num_heads=3, embed_dim=None, num_tokens=None, zero_proj_init=False, lr_cooldown_frac=0.7, geon_eps=1e-10, geon_s_min=1e-05, geon_s_max=100000.0, checkpoint_steps=[0, 1, 10, 50, 100, 200, 500, 1000, 2000, 4000, 6000, 8000, 10000, 12000])
+[2026-08-26 00:58:29.475080] Rules: [Rule(name='embed', patterns=['embed.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.3, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='proj', patterns=['proj.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.003125, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='one_d', patterns=['*.bias', '*.gains'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.01, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='two_d', patterns=['blocks.*.attn.*.weight', 'blocks.*.mlp.*.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.003, betas=(0.9, 0.95), nesterov=False, wd_raw=0.0002, coeff=1.0, warmup_steps=40)]
+[2026-08-26 00:58:29.475115] ====================================================================================================
+[2026-08-26 00:58:29.475348] Running PyTorch 2.13.0+cu130 compiled for CUDA 13.0
+[2026-08-26 00:58:29.475380] ====================================================================================================
+[2026-08-26 00:58:29.681624] rules OK: 4 rules uniquely cover 19 params x [0, 12000) steps
+[2026-08-26 00:58:29.974205] step:0/12000 val_loss:6.38925 train_time:0.000s step_avg:0.04ms
+[2026-08-26 00:58:29.985861] [checkpoint] saved step 0 (initialized model)
+[2026-08-26 00:58:30.010896] [checkpoint] saved step 1
+[2026-08-26 00:58:30.306924] step:1/12000 rolling_loss:6.39675 val_loss:5.94008 train_time:0.036s step_avg:36.35ms
+[2026-08-26 00:58:30.478410] [checkpoint] saved step 10
+[2026-08-26 00:58:30.774485] step:10/12000 rolling_loss:5.05580 val_loss:4.36429 train_time:0.208s step_avg:20.76ms
+[2026-08-26 00:58:31.472654] [checkpoint] saved step 50
+[2026-08-26 00:58:31.765761] step:50/12000 rolling_loss:4.19238 val_loss:4.02846 train_time:0.905s step_avg:18.11ms
+[2026-08-26 00:58:32.615027] [checkpoint] saved step 100
+[2026-08-26 00:58:32.911587] step:100/12000 rolling_loss:3.94946 val_loss:3.75503 train_time:1.755s step_avg:17.55ms
+[2026-08-26 00:58:34.601221] [checkpoint] saved step 200
+[2026-08-26 00:58:34.891615] step:200/12000 rolling_loss:3.47206 val_loss:3.32998 train_time:3.444s step_avg:17.22ms
+[2026-08-26 00:58:38.562473] step:400/12000 rolling_loss:3.16374 val_loss:3.13417 train_time:6.819s step_avg:17.05ms
+[2026-08-26 00:58:40.249665] [checkpoint] saved step 500
+[2026-08-26 00:58:40.539956] step:500/12000 rolling_loss:3.08044 val_loss:3.08323 train_time:8.505s step_avg:17.01ms
+[2026-08-26 00:58:42.529344] step:600/12000 rolling_loss:3.05018 val_loss:3.05576 train_time:10.199s step_avg:17.00ms
+[2026-08-26 00:58:46.223678] step:800/12000 rolling_loss:3.04049 val_loss:3.01476 train_time:13.602s step_avg:17.00ms
+[2026-08-26 00:58:49.605285] [checkpoint] saved step 1000
+[2026-08-26 00:58:49.895355] step:1000/12000 rolling_loss:2.95804 val_loss:2.98781 train_time:16.984s step_avg:16.98ms
+[2026-08-26 00:58:53.566389] step:1200/12000 rolling_loss:2.94055 val_loss:2.96932 train_time:20.364s step_avg:16.97ms
+[2026-08-26 00:58:57.232407] step:1400/12000 rolling_loss:2.92429 val_loss:2.93131 train_time:23.738s step_avg:16.96ms
+[2026-08-26 00:59:00.911821] step:1600/12000 rolling_loss:2.92321 val_loss:2.93004 train_time:27.127s step_avg:16.95ms
+[2026-08-26 00:59:04.567590] step:1800/12000 rolling_loss:2.90224 val_loss:2.90737 train_time:30.486s step_avg:16.94ms
+[2026-08-26 00:59:07.970723] [checkpoint] saved step 2000
+[2026-08-26 00:59:08.265618] step:2000/12000 rolling_loss:2.88279 val_loss:2.90274 train_time:33.889s step_avg:16.94ms
+[2026-08-26 00:59:11.940721] step:2200/12000 rolling_loss:2.86432 val_loss:2.88978 train_time:37.270s step_avg:16.94ms
+[2026-08-26 00:59:15.638091] step:2400/12000 rolling_loss:2.86577 val_loss:2.88281 train_time:40.671s step_avg:16.95ms
+[2026-08-26 00:59:19.344218] step:2600/12000 rolling_loss:2.87523 val_loss:2.91103 train_time:44.075s step_avg:16.95ms
+[2026-08-26 00:59:23.043021] step:2800/12000 rolling_loss:2.89620 val_loss:2.88425 train_time:47.477s step_avg:16.96ms
+[2026-08-26 00:59:26.775039] step:3000/12000 rolling_loss:2.86002 val_loss:2.87499 train_time:50.913s step_avg:16.97ms
+[2026-08-26 00:59:30.522001] step:3200/12000 rolling_loss:2.84582 val_loss:2.87581 train_time:54.369s step_avg:16.99ms
+[2026-08-26 00:59:34.219248] step:3400/12000 rolling_loss:2.84003 val_loss:2.86815 train_time:57.775s step_avg:16.99ms
+[2026-08-26 00:59:37.884478] step:3600/12000 rolling_loss:2.78704 val_loss:2.92579 train_time:61.149s step_avg:16.99ms
+[2026-08-26 00:59:41.569013] step:3800/12000 rolling_loss:2.83422 val_loss:2.85770 train_time:64.537s step_avg:16.98ms
+[2026-08-26 00:59:44.953634] [checkpoint] saved step 4000
+[2026-08-26 00:59:45.243858] step:4000/12000 rolling_loss:2.83034 val_loss:2.84386 train_time:67.921s step_avg:16.98ms
+[2026-08-26 00:59:48.921334] step:4200/12000 rolling_loss:2.82170 val_loss:2.84016 train_time:71.307s step_avg:16.98ms
+[2026-08-26 00:59:52.594978] step:4400/12000 rolling_loss:2.79513 val_loss:2.83387 train_time:74.684s step_avg:16.97ms
+[2026-08-26 00:59:56.266012] step:4600/12000 rolling_loss:2.79536 val_loss:2.81933 train_time:78.059s step_avg:16.97ms
+[2026-08-26 00:59:59.928504] step:4800/12000 rolling_loss:2.81098 val_loss:2.83687 train_time:81.431s step_avg:16.96ms
+[2026-08-26 01:00:03.589182] step:5000/12000 rolling_loss:2.79969 val_loss:2.81569 train_time:84.802s step_avg:16.96ms
+[2026-08-26 01:00:07.242054] step:5200/12000 rolling_loss:2.81647 val_loss:2.81336 train_time:88.158s step_avg:16.95ms
+[2026-08-26 01:00:10.910439] step:5400/12000 rolling_loss:2.80376 val_loss:2.82000 train_time:91.536s step_avg:16.95ms
+[2026-08-26 01:00:14.539551] step:5600/12000 rolling_loss:2.79345 val_loss:2.80632 train_time:94.875s step_avg:16.94ms
+[2026-08-26 01:00:18.192289] step:5800/12000 rolling_loss:2.76616 val_loss:2.80394 train_time:98.237s step_avg:16.94ms
+[2026-08-26 01:00:21.544961] [checkpoint] saved step 6000
+[2026-08-26 01:00:21.835176] step:6000/12000 rolling_loss:2.78346 val_loss:2.80002 train_time:101.589s step_avg:16.93ms
+[2026-08-26 01:00:25.483397] step:6200/12000 rolling_loss:2.77764 val_loss:2.79628 train_time:104.947s step_avg:16.93ms
+[2026-08-26 01:00:29.105257] step:6400/12000 rolling_loss:2.76433 val_loss:2.78660 train_time:108.279s step_avg:16.92ms
+[2026-08-26 01:00:32.726492] step:6600/12000 rolling_loss:2.75786 val_loss:2.78880 train_time:111.610s step_avg:16.91ms
+[2026-08-26 01:00:36.349837] step:6800/12000 rolling_loss:2.77389 val_loss:2.79719 train_time:114.942s step_avg:16.90ms
+[2026-08-26 01:00:39.978658] step:7000/12000 rolling_loss:2.78874 val_loss:2.77989 train_time:118.281s step_avg:16.90ms
+[2026-08-26 01:00:43.594060] step:7200/12000 rolling_loss:2.76873 val_loss:2.77467 train_time:121.606s step_avg:16.89ms
+[2026-08-26 01:00:47.231902] step:7400/12000 rolling_loss:2.78242 val_loss:2.78565 train_time:124.953s step_avg:16.89ms
+[2026-08-26 01:00:50.867620] step:7600/12000 rolling_loss:2.75706 val_loss:2.77596 train_time:128.298s step_avg:16.88ms
+[2026-08-26 01:00:54.495421] step:7800/12000 rolling_loss:2.75871 val_loss:2.76580 train_time:131.636s step_avg:16.88ms
+[2026-08-26 01:00:57.833076] [checkpoint] saved step 8000
+[2026-08-26 01:00:58.123604] step:8000/12000 rolling_loss:2.75182 val_loss:2.77302 train_time:134.973s step_avg:16.87ms
+[2026-08-26 01:01:01.751113] step:8200/12000 rolling_loss:2.76256 val_loss:2.76130 train_time:138.310s step_avg:16.87ms
+[2026-08-26 01:01:05.365609] step:8400/12000 rolling_loss:2.75208 val_loss:2.76561 train_time:141.634s step_avg:16.86ms
+[2026-08-26 01:01:08.999731] step:8600/12000 rolling_loss:2.77960 val_loss:2.75520 train_time:144.978s step_avg:16.86ms
+[2026-08-26 01:01:12.625335] step:8800/12000 rolling_loss:2.75941 val_loss:2.74996 train_time:148.313s step_avg:16.85ms
+[2026-08-26 01:01:16.256009] step:9000/12000 rolling_loss:2.73300 val_loss:2.74434 train_time:151.653s step_avg:16.85ms
+[2026-08-26 01:01:19.885993] step:9200/12000 rolling_loss:2.72280 val_loss:2.74613 train_time:154.993s step_avg:16.85ms
+[2026-08-26 01:01:23.514350] step:9400/12000 rolling_loss:2.71489 val_loss:2.74443 train_time:158.331s step_avg:16.84ms
+[2026-08-26 01:01:27.135765] step:9600/12000 rolling_loss:2.72136 val_loss:2.73909 train_time:161.662s step_avg:16.84ms
+[2026-08-26 01:01:30.752201] step:9800/12000 rolling_loss:2.70729 val_loss:2.73458 train_time:164.980s step_avg:16.83ms
+[2026-08-26 01:01:34.094010] [checkpoint] saved step 10000
+[2026-08-26 01:01:34.384243] step:10000/12000 rolling_loss:2.73069 val_loss:2.73415 train_time:168.322s step_avg:16.83ms
+[2026-08-26 01:01:38.007319] step:10200/12000 rolling_loss:2.71958 val_loss:2.73136 train_time:171.654s step_avg:16.83ms
+[2026-08-26 01:01:41.644787] step:10400/12000 rolling_loss:2.71882 val_loss:2.72938 train_time:174.993s step_avg:16.83ms
+[2026-08-26 01:01:45.265408] step:10600/12000 rolling_loss:2.72639 val_loss:2.72403 train_time:178.323s step_avg:16.82ms
+[2026-08-26 01:01:48.890461] step:10800/12000 rolling_loss:2.71183 val_loss:2.72144 train_time:181.657s step_avg:16.82ms
+[2026-08-26 01:01:52.517350] step:11000/12000 rolling_loss:2.69818 val_loss:2.71745 train_time:184.993s step_avg:16.82ms
+[2026-08-26 01:01:56.152693] step:11200/12000 rolling_loss:2.72255 val_loss:2.71462 train_time:188.338s step_avg:16.82ms
+[2026-08-26 01:01:59.763599] step:11400/12000 rolling_loss:2.69537 val_loss:2.71167 train_time:191.659s step_avg:16.81ms
+[2026-08-26 01:02:03.395496] step:11600/12000 rolling_loss:2.70343 val_loss:2.70934 train_time:195.000s step_avg:16.81ms
+[2026-08-26 01:02:07.012653] step:11800/12000 rolling_loss:2.73546 val_loss:2.70695 train_time:198.327s step_avg:16.81ms
+[2026-08-26 01:02:10.346926] [checkpoint] saved step 12000
+[2026-08-26 01:02:10.637225] step:12000/12000 rolling_loss:2.68150 val_loss:2.70595 train_time:201.661s step_avg:16.81ms

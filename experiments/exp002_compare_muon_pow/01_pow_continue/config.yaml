@@ -79,3 +79,112 @@ runs:
     override: *OVERRIDE
     continue_steps: 512
     reset_optimizer_state: true
+
+  - name: muon_no_reset_seed1338
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1338/step_000010
+    checkpoint_step: [11, 14, 26]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 256
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1338
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1338/step_000100
+    checkpoint_step: [101, 104, 116]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1338
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1338/step_000500
+    checkpoint_step: [501, 504, 516]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1338
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1338/step_002000
+    checkpoint_step: [2001, 2004, 2016]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1338
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1338/step_004000
+    checkpoint_step: [4001, 4004, 4016]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+
+  - name: muon_no_reset_seed1339
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1339/step_000010
+    checkpoint_step: [11, 14, 26]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 256
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1339
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1339/step_000100
+    checkpoint_step: [101, 104, 116]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1339
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1339/step_000500
+    checkpoint_step: [501, 504, 516]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1339
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1339/step_002000
+    checkpoint_step: [2001, 2004, 2016]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1339
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1339/step_004000
+    checkpoint_step: [4001, 4004, 4016]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+
+  - name: muon_no_reset_seed1340
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1340/step_000010
+    checkpoint_step: [11, 14, 26]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 256
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1340
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1340/step_000100
+    checkpoint_step: [101, 104, 116]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1340
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1340/step_000500
+    checkpoint_step: [501, 504, 516]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1340
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1340/step_002000
+    checkpoint_step: [2001, 2004, 2016]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+  - name: muon_no_reset_seed1340
+    path: experiments/exp002_compare_muon_pow/01_pow_checkpoint/muon_seed1340/step_004000
+    checkpoint_step: [4001, 4004, 4016]
+    branch_names: [muon, svdp_m025, svdp_z000, svdp_p025]
+    override: *OVERRIDE
+    continue_steps: 512
+    reset_optimizer_state: false
+

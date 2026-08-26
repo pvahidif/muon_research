@@ -361,7 +361,8 @@ def run_geon_rules(
     val_inputs, val_targets = next(
         distributed_data_generator(
             os.path.join(
-                resolve_repo_path(train_config.data_source), train_config.val_data_pattern
+                resolve_repo_path(train_config.data_source),
+                train_config.val_data_pattern,
             ),
             train_config.val_size,
             vocab_size=train_config.vocab_size,

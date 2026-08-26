@@ -1,0 +1,522 @@
+====================================================================================================
+Continuing: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1338/step_000200 step=216 branches=['adamw', 'muon'] override={'rules.two_d.update': 'adamw', 'rules.two_d.sizing': 'learning_rate', 'rules.two_d.lr': 0.003, 'rules.two_d.betas': [0.9, 0.95], 'rules.two_d.nesterov': False, 'rules.two_d.wd_raw': 0.0002}
+Config: TrainConfig(data_source='data/fineweb10B_v500', train_steps=12000, report_steps=200, seq_len=1024, val_size=2097152, batch_size=32768, mbs=32, vocab_size=500, num_layers=1, model_dim=192, train_data_pattern='fineweb_train_*.bin', val_data_pattern='fineweb_val_*.bin', seed=1338, model_type='gpt', expansion_ratio=4.0, head_dim=64, num_heads=3, embed_dim=None, num_tokens=None, zero_proj_init=False, lr_cooldown_frac=0.7, geon_eps=1e-10, geon_s_min=1e-05, geon_s_max=100000.0, checkpoint_steps=[0, 1, 10, 50, 100, 200, 500, 1000, 2000, 4000, 6000, 8000, 10000, 12000])
+Rules: [Rule(name='embed', patterns=['embed.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.3, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='proj', patterns=['proj.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.003125, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='one_d', patterns=['*.bias', '*.gains'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.01, betas=(0.8, 0.95), nesterov=False, wd_raw=0.0, coeff=1.0, warmup_steps=0), Rule(name='two_d', patterns=['blocks.*.attn.*.weight', 'blocks.*.mlp.*.weight'], start=0, end=None, update='adamw', sizing='learning_rate', lr=0.003, betas=(0.9, 0.95), nesterov=False, wd_raw=0.0002, coeff=1.0, warmup_steps=40)]
+end_step: 472
+====================================================================================================
+  [compile] adamw: 0.01s
+loaded experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1338/step_000200/branches/adamw/checkpoints/step_216.pt at step 216
+  [compile] muon: 0.02s
+loaded experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1338/step_000200/branches/muon/checkpoints/step_216.pt at step 216
+step:217/472 adamw rolling_loss:3.38307 val_loss:3.28312 train_time:0.004s
+step:217/472 muon rolling_loss:3.38063 val_loss:3.28567 train_time:0.301s
+step:218/472 adamw rolling_loss:3.37911 val_loss:3.29074 train_time:0.613s
+step:218/472 muon rolling_loss:3.37662 val_loss:3.28903 train_time:0.926s
+step:219/472 adamw rolling_loss:3.44245 val_loss:3.31784 train_time:1.234s
+step:219/472 muon rolling_loss:3.44016 val_loss:3.31683 train_time:1.542s
+step:220/472 adamw rolling_loss:3.42599 val_loss:3.33159 train_time:1.846s
+step:220/472 muon rolling_loss:3.42372 val_loss:3.32457 train_time:2.156s
+step:221/472 adamw rolling_loss:3.39815 val_loss:3.32491 train_time:2.469s
+step:221/472 muon rolling_loss:3.39421 val_loss:3.31921 train_time:2.782s
+step:222/472 adamw rolling_loss:3.37844 train_time:3.096s
+step:222/472 muon rolling_loss:3.37447 train_time:3.113s
+step:223/472 adamw rolling_loss:3.35139 val_loss:3.30896 train_time:3.130s
+step:223/472 muon rolling_loss:3.34651 val_loss:3.29982 train_time:3.448s
+step:224/472 adamw rolling_loss:3.34412 train_time:3.759s
+step:224/472 muon rolling_loss:3.33867 train_time:3.774s
+step:225/472 adamw rolling_loss:3.33554 val_loss:3.29213 train_time:3.791s
+step:225/472 muon rolling_loss:3.32950 val_loss:3.28086 train_time:4.105s
+step:226/472 adamw rolling_loss:3.33745 train_time:4.419s
+step:226/472 muon rolling_loss:3.33083 train_time:4.434s
+step:227/472 adamw rolling_loss:3.32955 val_loss:3.28066 train_time:4.451s
+step:227/472 muon rolling_loss:3.32266 val_loss:3.26869 train_time:4.765s
+step:228/472 adamw rolling_loss:3.33583 train_time:5.074s
+step:228/472 muon rolling_loss:3.32834 train_time:5.090s
+step:229/472 adamw rolling_loss:3.32396 val_loss:3.27608 train_time:5.107s
+step:229/472 muon rolling_loss:3.31620 val_loss:3.26476 train_time:5.414s
+step:230/472 adamw rolling_loss:3.30495 train_time:5.721s
+step:230/472 muon rolling_loss:3.29832 train_time:5.736s
+step:231/472 adamw rolling_loss:3.29543 val_loss:3.30884 train_time:5.753s
+step:231/472 muon rolling_loss:3.28837 val_loss:3.29399 train_time:6.061s
+step:232/472 adamw rolling_loss:3.29054 train_time:6.367s
+step:232/472 muon rolling_loss:3.28283 train_time:6.383s
+step:233/472 adamw rolling_loss:3.29392 val_loss:3.35289 train_time:6.399s
+step:233/472 muon rolling_loss:3.28556 val_loss:3.33868 train_time:6.708s
+step:234/472 adamw rolling_loss:3.29994 train_time:7.021s
+step:234/472 muon rolling_loss:3.29119 train_time:7.039s
+step:235/472 adamw rolling_loss:3.30765 train_time:7.055s
+step:235/472 muon rolling_loss:3.29860 train_time:7.072s
+step:236/472 adamw rolling_loss:3.31326 train_time:7.090s
+step:236/472 muon rolling_loss:3.30389 train_time:7.106s
+step:237/472 adamw rolling_loss:3.30721 val_loss:3.31664 train_time:7.123s
+step:237/472 muon rolling_loss:3.29744 val_loss:3.30151 train_time:7.437s
+step:238/472 adamw rolling_loss:3.27405 train_time:7.750s
+step:238/472 muon rolling_loss:3.26377 train_time:7.766s
+step:239/472 adamw rolling_loss:3.24644 train_time:7.783s
+step:239/472 muon rolling_loss:3.23628 train_time:7.800s
+step:240/472 adamw rolling_loss:3.25477 train_time:7.817s
+step:240/472 muon rolling_loss:3.24427 train_time:7.834s
+step:241/472 adamw rolling_loss:3.26180 val_loss:3.37855 train_time:7.851s
+step:241/472 muon rolling_loss:3.25101 val_loss:3.36166 train_time:8.166s
+step:242/472 adamw rolling_loss:3.26401 train_time:8.476s
+step:242/472 muon rolling_loss:3.25282 train_time:8.491s
+step:243/472 adamw rolling_loss:3.27170 train_time:8.508s
+step:243/472 muon rolling_loss:3.26019 train_time:8.524s
+step:244/472 adamw rolling_loss:3.27443 train_time:8.540s
+step:244/472 muon rolling_loss:3.26265 train_time:8.557s
+step:245/472 adamw rolling_loss:3.27867 val_loss:3.32348 train_time:8.573s
+step:245/472 muon rolling_loss:3.26660 val_loss:3.30623 train_time:8.881s
+step:246/472 adamw rolling_loss:3.27632 train_time:9.188s
+step:246/472 muon rolling_loss:3.26394 train_time:9.203s
+step:247/472 adamw rolling_loss:3.27329 train_time:9.220s
+step:247/472 muon rolling_loss:3.26069 train_time:9.235s
+step:248/472 adamw rolling_loss:3.27487 train_time:9.251s
+step:248/472 muon rolling_loss:3.26213 train_time:9.269s
+step:249/472 adamw rolling_loss:3.27552 val_loss:3.28005 train_time:9.286s
+step:249/472 muon rolling_loss:3.26271 val_loss:3.26256 train_time:9.594s
+step:250/472 adamw rolling_loss:3.27508 train_time:9.899s
+step:250/472 muon rolling_loss:3.26205 train_time:9.916s
+step:251/472 adamw rolling_loss:3.26819 train_time:9.931s
+step:251/472 muon rolling_loss:3.25495 train_time:9.947s
+step:252/472 adamw rolling_loss:3.27021 train_time:9.963s
+step:252/472 muon rolling_loss:3.25683 train_time:9.980s
+step:253/472 adamw rolling_loss:3.26812 val_loss:3.25190 train_time:9.996s
+step:253/472 muon rolling_loss:3.25459 val_loss:3.23526 train_time:10.310s
+step:254/472 adamw rolling_loss:3.26580 train_time:10.622s
+step:254/472 muon rolling_loss:3.25211 train_time:10.638s
+step:255/472 adamw rolling_loss:3.26504 train_time:10.657s
+step:255/472 muon rolling_loss:3.25130 train_time:10.673s
+step:256/472 adamw rolling_loss:3.25932 train_time:10.690s
+step:256/472 muon rolling_loss:3.24541 train_time:10.706s
+step:257/472 adamw rolling_loss:3.25638 val_loss:3.24687 train_time:10.724s
+step:257/472 muon rolling_loss:3.24236 val_loss:3.23081 train_time:11.039s
+step:258/472 adamw rolling_loss:3.25558 train_time:11.345s
+step:258/472 muon rolling_loss:3.24143 train_time:11.361s
+step:259/472 adamw rolling_loss:3.25135 train_time:11.378s
+step:259/472 muon rolling_loss:3.23714 train_time:11.395s
+step:260/472 adamw rolling_loss:3.25100 train_time:11.410s
+step:260/472 muon rolling_loss:3.23677 train_time:11.427s
+step:261/472 adamw rolling_loss:3.24405 val_loss:3.23603 train_time:11.443s
+step:261/472 muon rolling_loss:3.22971 val_loss:3.21947 train_time:11.751s
+step:262/472 adamw rolling_loss:3.24448 train_time:12.058s
+step:262/472 muon rolling_loss:3.23010 train_time:12.074s
+step:263/472 adamw rolling_loss:3.24329 train_time:12.089s
+step:263/472 muon rolling_loss:3.22889 train_time:12.106s
+step:264/472 adamw rolling_loss:3.24224 train_time:12.123s
+step:264/472 muon rolling_loss:3.22779 train_time:12.140s
+step:265/472 adamw rolling_loss:3.23963 val_loss:3.23303 train_time:12.155s
+step:265/472 muon rolling_loss:3.22512 val_loss:3.21781 train_time:12.463s
+step:266/472 adamw rolling_loss:3.24114 train_time:12.770s
+step:266/472 muon rolling_loss:3.22643 train_time:12.785s
+step:267/472 adamw rolling_loss:3.23744 train_time:12.802s
+step:267/472 muon rolling_loss:3.22271 train_time:12.819s
+step:268/472 adamw rolling_loss:3.23623 train_time:12.834s
+step:268/472 muon rolling_loss:3.22154 train_time:12.852s
+step:269/472 adamw rolling_loss:3.23133 val_loss:3.23771 train_time:12.871s
+step:269/472 muon rolling_loss:3.21654 val_loss:3.22099 train_time:13.184s
+step:270/472 adamw rolling_loss:3.23161 train_time:13.497s
+step:270/472 muon rolling_loss:3.21673 train_time:13.514s
+step:271/472 adamw rolling_loss:3.22626 train_time:13.530s
+step:271/472 muon rolling_loss:3.21132 train_time:13.547s
+step:272/472 adamw rolling_loss:3.22357 train_time:13.566s
+step:272/472 muon rolling_loss:3.20861 train_time:13.582s
+step:273/472 adamw rolling_loss:3.22304 val_loss:3.24659 train_time:13.598s
+step:273/472 muon rolling_loss:3.20797 val_loss:3.23209 train_time:13.920s
+step:274/472 adamw rolling_loss:3.22435 train_time:14.243s
+step:274/472 muon rolling_loss:3.20924 train_time:14.260s
+step:275/472 adamw rolling_loss:3.22499 train_time:14.276s
+step:275/472 muon rolling_loss:3.20983 train_time:14.294s
+step:276/472 adamw rolling_loss:3.22451 train_time:14.312s
+step:276/472 muon rolling_loss:3.20932 train_time:14.327s
+step:277/472 adamw rolling_loss:3.22136 val_loss:3.24204 train_time:14.347s
+step:277/472 muon rolling_loss:3.20607 val_loss:3.22795 train_time:14.660s
+step:278/472 adamw rolling_loss:3.21815 train_time:14.972s
+step:278/472 muon rolling_loss:3.20284 train_time:14.987s
+step:279/472 adamw rolling_loss:3.21952 train_time:15.003s
+step:279/472 muon rolling_loss:3.20422 train_time:15.020s
+step:280/472 adamw rolling_loss:3.22021 train_time:15.036s
+step:280/472 muon rolling_loss:3.20496 train_time:15.052s
+step:281/472 adamw rolling_loss:3.22521 val_loss:3.26130 train_time:15.070s
+step:281/472 muon rolling_loss:3.20997 val_loss:3.24572 train_time:15.377s
+step:282/472 adamw rolling_loss:3.22450 train_time:15.684s
+step:282/472 muon rolling_loss:3.20926 train_time:15.699s
+step:283/472 adamw rolling_loss:3.22340 train_time:15.716s
+step:283/472 muon rolling_loss:3.20808 train_time:15.733s
+step:284/472 adamw rolling_loss:3.22647 train_time:15.749s
+step:284/472 muon rolling_loss:3.21117 train_time:15.766s
+step:285/472 adamw rolling_loss:3.22633 train_time:15.782s
+step:285/472 muon rolling_loss:3.21103 train_time:15.797s
+step:286/472 adamw rolling_loss:3.22089 train_time:15.815s
+step:286/472 muon rolling_loss:3.20561 train_time:15.830s
+step:287/472 adamw rolling_loss:3.21753 train_time:15.847s
+step:287/472 muon rolling_loss:3.20223 train_time:15.865s
+step:288/472 adamw rolling_loss:3.21836 train_time:15.883s
+step:288/472 muon rolling_loss:3.20301 train_time:15.898s
+step:289/472 adamw rolling_loss:3.22167 val_loss:3.31880 train_time:15.916s
+step:289/472 muon rolling_loss:3.20626 val_loss:3.30397 train_time:16.230s
+step:290/472 adamw rolling_loss:3.22648 train_time:16.543s
+step:290/472 muon rolling_loss:3.21114 train_time:16.559s
+step:291/472 adamw rolling_loss:3.22743 train_time:16.576s
+step:291/472 muon rolling_loss:3.21207 train_time:16.593s
+step:292/472 adamw rolling_loss:3.22920 train_time:16.610s
+step:292/472 muon rolling_loss:3.21395 train_time:16.627s
+step:293/472 adamw rolling_loss:3.23183 train_time:16.645s
+step:293/472 muon rolling_loss:3.21658 train_time:16.660s
+step:294/472 adamw rolling_loss:3.23384 train_time:16.677s
+step:294/472 muon rolling_loss:3.21864 train_time:16.694s
+step:295/472 adamw rolling_loss:3.23434 train_time:16.712s
+step:295/472 muon rolling_loss:3.21921 train_time:16.730s
+step:296/472 adamw rolling_loss:3.23436 train_time:16.746s
+step:296/472 muon rolling_loss:3.21926 train_time:16.762s
+step:297/472 adamw rolling_loss:3.23470 val_loss:3.23759 train_time:16.780s
+step:297/472 muon rolling_loss:3.21964 val_loss:3.22263 train_time:17.095s
+step:298/472 adamw rolling_loss:3.23478 train_time:17.404s
+step:298/472 muon rolling_loss:3.21968 train_time:17.420s
+step:299/472 adamw rolling_loss:3.23600 train_time:17.436s
+step:299/472 muon rolling_loss:3.22091 train_time:17.452s
+step:300/472 adamw rolling_loss:3.23617 train_time:17.469s
+step:300/472 muon rolling_loss:3.22112 train_time:17.484s
+step:301/472 adamw rolling_loss:3.23571 train_time:17.501s
+step:301/472 muon rolling_loss:3.22066 train_time:17.518s
+step:302/472 adamw rolling_loss:3.23611 train_time:17.533s
+step:302/472 muon rolling_loss:3.22110 train_time:17.550s
+step:303/472 adamw rolling_loss:3.23389 train_time:17.567s
+step:303/472 muon rolling_loss:3.21894 train_time:17.583s
+step:304/472 adamw rolling_loss:3.23348 train_time:17.600s
+step:304/472 muon rolling_loss:3.21856 train_time:17.616s
+step:305/472 adamw rolling_loss:3.23814 val_loss:3.20919 train_time:17.632s
+step:305/472 muon rolling_loss:3.22339 val_loss:3.19571 train_time:17.940s
+step:306/472 adamw rolling_loss:3.24053 train_time:18.247s
+step:306/472 muon rolling_loss:3.22587 train_time:18.262s
+step:307/472 adamw rolling_loss:3.23959 train_time:18.281s
+step:307/472 muon rolling_loss:3.22493 train_time:18.295s
+step:308/472 adamw rolling_loss:3.23798 train_time:18.311s
+step:308/472 muon rolling_loss:3.22336 train_time:18.328s
+step:309/472 adamw rolling_loss:3.23857 train_time:18.344s
+step:309/472 muon rolling_loss:3.22404 train_time:18.361s
+step:310/472 adamw rolling_loss:3.23866 train_time:18.377s
+step:310/472 muon rolling_loss:3.22424 train_time:18.394s
+step:311/472 adamw rolling_loss:3.23733 train_time:18.410s
+step:311/472 muon rolling_loss:3.22293 train_time:18.426s
+step:312/472 adamw rolling_loss:3.23518 train_time:18.443s
+step:312/472 muon rolling_loss:3.22080 train_time:18.459s
+step:313/472 adamw rolling_loss:3.23433 val_loss:3.21009 train_time:18.475s
+step:313/472 muon rolling_loss:3.22001 val_loss:3.19640 train_time:18.784s
+step:314/472 adamw rolling_loss:3.23538 train_time:19.098s
+step:314/472 muon rolling_loss:3.22111 train_time:19.114s
+step:315/472 adamw rolling_loss:3.23464 train_time:19.129s
+step:315/472 muon rolling_loss:3.22041 train_time:19.146s
+step:316/472 adamw rolling_loss:3.23344 train_time:19.163s
+step:316/472 muon rolling_loss:3.21923 train_time:19.179s
+step:317/472 adamw rolling_loss:3.23287 train_time:19.195s
+step:317/472 muon rolling_loss:3.21870 train_time:19.211s
+step:318/472 adamw rolling_loss:3.23221 train_time:19.228s
+step:318/472 muon rolling_loss:3.21808 train_time:19.244s
+step:319/472 adamw rolling_loss:3.23000 train_time:19.260s
+step:319/472 muon rolling_loss:3.21589 train_time:19.278s
+step:320/472 adamw rolling_loss:3.22731 train_time:19.294s
+step:320/472 muon rolling_loss:3.21327 train_time:19.309s
+step:321/472 adamw rolling_loss:3.22534 val_loss:3.18512 train_time:19.325s
+step:321/472 muon rolling_loss:3.21132 val_loss:3.17277 train_time:19.634s
+step:322/472 adamw rolling_loss:3.23031 train_time:19.943s
+step:322/472 muon rolling_loss:3.21638 train_time:19.960s
+step:323/472 adamw rolling_loss:3.23394 train_time:19.977s
+step:323/472 muon rolling_loss:3.22010 train_time:19.994s
+step:324/472 adamw rolling_loss:3.23439 train_time:20.010s
+step:324/472 muon rolling_loss:3.22060 train_time:20.026s
+step:325/472 adamw rolling_loss:3.23446 train_time:20.045s
+step:325/472 muon rolling_loss:3.22067 train_time:20.061s
+step:326/472 adamw rolling_loss:3.23494 train_time:20.077s
+step:326/472 muon rolling_loss:3.22113 train_time:20.095s
+step:327/472 adamw rolling_loss:3.23562 train_time:20.112s
+step:327/472 muon rolling_loss:3.22184 train_time:20.128s
+step:328/472 adamw rolling_loss:3.23435 train_time:20.145s
+step:328/472 muon rolling_loss:3.22061 train_time:20.162s
+step:329/472 adamw rolling_loss:3.23350 val_loss:3.19449 train_time:20.179s
+step:329/472 muon rolling_loss:3.21979 val_loss:3.18267 train_time:20.493s
+step:330/472 adamw rolling_loss:3.23079 train_time:20.804s
+step:330/472 muon rolling_loss:3.21716 train_time:20.820s
+step:331/472 adamw rolling_loss:3.22734 train_time:20.836s
+step:331/472 muon rolling_loss:3.21371 train_time:20.852s
+step:332/472 adamw rolling_loss:3.22771 train_time:20.871s
+step:332/472 muon rolling_loss:3.21410 train_time:20.887s
+step:333/472 adamw rolling_loss:3.22532 train_time:20.902s
+step:333/472 muon rolling_loss:3.21168 train_time:20.919s
+step:334/472 adamw rolling_loss:3.22441 train_time:20.937s
+step:334/472 muon rolling_loss:3.21081 train_time:20.952s
+step:335/472 adamw rolling_loss:3.22060 train_time:20.969s
+step:335/472 muon rolling_loss:3.20700 train_time:20.986s
+step:336/472 adamw rolling_loss:3.21605 train_time:21.003s
+step:336/472 muon rolling_loss:3.20244 train_time:21.018s
+step:337/472 adamw rolling_loss:3.21360 val_loss:3.19613 train_time:21.035s
+step:337/472 muon rolling_loss:3.19999 val_loss:3.18452 train_time:21.344s
+step:338/472 adamw rolling_loss:3.21170 train_time:21.655s
+step:338/472 muon rolling_loss:3.19815 train_time:21.671s
+step:339/472 adamw rolling_loss:3.20901 train_time:21.688s
+step:339/472 muon rolling_loss:3.19553 train_time:21.704s
+step:340/472 adamw rolling_loss:3.20613 train_time:21.721s
+step:340/472 muon rolling_loss:3.19271 train_time:21.737s
+step:341/472 adamw rolling_loss:3.20254 train_time:21.755s
+step:341/472 muon rolling_loss:3.18922 train_time:21.772s
+step:342/472 adamw rolling_loss:3.20112 train_time:21.790s
+step:342/472 muon rolling_loss:3.18783 train_time:21.805s
+step:343/472 adamw rolling_loss:3.20042 train_time:21.823s
+step:343/472 muon rolling_loss:3.18722 train_time:21.839s
+step:344/472 adamw rolling_loss:3.19705 train_time:21.856s
+step:344/472 muon rolling_loss:3.18388 train_time:21.874s
+step:345/472 adamw rolling_loss:3.19500 val_loss:3.19286 train_time:21.891s
+step:345/472 muon rolling_loss:3.18181 val_loss:3.18050 train_time:22.205s
+step:346/472 adamw rolling_loss:3.19459 train_time:22.517s
+step:346/472 muon rolling_loss:3.18143 train_time:22.533s
+step:347/472 adamw rolling_loss:3.19416 train_time:22.549s
+step:347/472 muon rolling_loss:3.18102 train_time:22.565s
+step:348/472 adamw rolling_loss:3.19346 train_time:22.581s
+step:348/472 muon rolling_loss:3.18038 train_time:22.597s
+step:349/472 adamw rolling_loss:3.19167 train_time:22.614s
+step:349/472 muon rolling_loss:3.17863 train_time:22.631s
+step:350/472 adamw rolling_loss:3.18984 train_time:22.648s
+step:350/472 muon rolling_loss:3.17681 train_time:22.665s
+step:351/472 adamw rolling_loss:3.18720 train_time:22.680s
+step:351/472 muon rolling_loss:3.17421 train_time:22.696s
+step:352/472 adamw rolling_loss:3.18262 train_time:22.713s
+step:352/472 muon rolling_loss:3.16961 train_time:22.729s
+step:353/472 adamw rolling_loss:3.17762 val_loss:3.16398 train_time:22.746s
+step:353/472 muon rolling_loss:3.16460 val_loss:3.15391 train_time:23.054s
+step:354/472 adamw rolling_loss:3.17448 train_time:23.361s
+step:354/472 muon rolling_loss:3.16152 train_time:23.376s
+step:355/472 adamw rolling_loss:3.17736 train_time:23.393s
+step:355/472 muon rolling_loss:3.16442 train_time:23.409s
+step:356/472 adamw rolling_loss:3.17903 train_time:23.425s
+step:356/472 muon rolling_loss:3.16617 train_time:23.441s
+step:357/472 adamw rolling_loss:3.17838 train_time:23.457s
+step:357/472 muon rolling_loss:3.16558 train_time:23.474s
+step:358/472 adamw rolling_loss:3.17805 train_time:23.490s
+step:358/472 muon rolling_loss:3.16524 train_time:23.506s
+step:359/472 adamw rolling_loss:3.17700 train_time:23.523s
+step:359/472 muon rolling_loss:3.16421 train_time:23.539s
+step:360/472 adamw rolling_loss:3.17622 train_time:23.555s
+step:360/472 muon rolling_loss:3.16342 train_time:23.572s
+step:361/472 adamw rolling_loss:3.17495 val_loss:3.15702 train_time:23.588s
+step:361/472 muon rolling_loss:3.16223 val_loss:3.14682 train_time:23.897s
+step:362/472 adamw rolling_loss:3.17608 train_time:24.203s
+step:362/472 muon rolling_loss:3.16339 train_time:24.218s
+step:363/472 adamw rolling_loss:3.17690 train_time:24.235s
+step:363/472 muon rolling_loss:3.16426 train_time:24.252s
+step:364/472 adamw rolling_loss:3.17620 train_time:24.268s
+step:364/472 muon rolling_loss:3.16358 train_time:24.288s
+step:365/472 adamw rolling_loss:3.17648 train_time:24.303s
+step:365/472 muon rolling_loss:3.16385 train_time:24.319s
+step:366/472 adamw rolling_loss:3.17615 train_time:24.336s
+step:366/472 muon rolling_loss:3.16351 train_time:24.353s
+step:367/472 adamw rolling_loss:3.17670 train_time:24.370s
+step:367/472 muon rolling_loss:3.16406 train_time:24.388s
+step:368/472 adamw rolling_loss:3.17712 train_time:24.405s
+step:368/472 muon rolling_loss:3.16449 train_time:24.421s
+step:369/472 adamw rolling_loss:3.17643 val_loss:3.14779 train_time:24.439s
+step:369/472 muon rolling_loss:3.16388 val_loss:3.13567 train_time:24.752s
+step:370/472 adamw rolling_loss:3.17553 train_time:25.058s
+step:370/472 muon rolling_loss:3.16301 train_time:25.074s
+step:371/472 adamw rolling_loss:3.17145 train_time:25.091s
+step:371/472 muon rolling_loss:3.15895 train_time:25.106s
+step:372/472 adamw rolling_loss:3.16682 train_time:25.123s
+step:372/472 muon rolling_loss:3.15433 train_time:25.139s
+step:373/472 adamw rolling_loss:3.16751 train_time:25.156s
+step:373/472 muon rolling_loss:3.15505 train_time:25.172s
+step:374/472 adamw rolling_loss:3.16819 train_time:25.188s
+step:374/472 muon rolling_loss:3.15578 train_time:25.204s
+step:375/472 adamw rolling_loss:3.16521 train_time:25.221s
+step:375/472 muon rolling_loss:3.15278 train_time:25.238s
+step:376/472 adamw rolling_loss:3.16210 train_time:25.254s
+step:376/472 muon rolling_loss:3.14963 train_time:25.272s
+step:377/472 adamw rolling_loss:3.16277 val_loss:3.15531 train_time:25.288s
+step:377/472 muon rolling_loss:3.15035 val_loss:3.14514 train_time:25.595s
+step:378/472 adamw rolling_loss:3.16124 train_time:25.904s
+step:378/472 muon rolling_loss:3.14885 train_time:25.920s
+step:379/472 adamw rolling_loss:3.16019 train_time:25.937s
+step:379/472 muon rolling_loss:3.14785 train_time:25.955s
+step:380/472 adamw rolling_loss:3.15967 train_time:25.972s
+step:380/472 muon rolling_loss:3.14730 train_time:25.989s
+step:381/472 adamw rolling_loss:3.15936 train_time:26.005s
+step:381/472 muon rolling_loss:3.14703 train_time:26.022s
+step:382/472 adamw rolling_loss:3.16139 train_time:26.039s
+step:382/472 muon rolling_loss:3.14909 train_time:26.056s
+step:383/472 adamw rolling_loss:3.15978 train_time:26.073s
+step:383/472 muon rolling_loss:3.14746 train_time:26.090s
+step:384/472 adamw rolling_loss:3.15759 train_time:26.107s
+step:384/472 muon rolling_loss:3.14531 train_time:26.124s
+step:385/472 adamw rolling_loss:3.15723 val_loss:3.14150 train_time:26.141s
+step:385/472 muon rolling_loss:3.14496 val_loss:3.13160 train_time:26.455s
+step:386/472 adamw rolling_loss:3.15601 train_time:26.766s
+step:386/472 muon rolling_loss:3.14375 train_time:26.782s
+step:387/472 adamw rolling_loss:3.15699 train_time:26.798s
+step:387/472 muon rolling_loss:3.14475 train_time:26.814s
+step:388/472 adamw rolling_loss:3.15746 train_time:26.831s
+step:388/472 muon rolling_loss:3.14528 train_time:26.848s
+step:389/472 adamw rolling_loss:3.15678 train_time:26.864s
+step:389/472 muon rolling_loss:3.14465 train_time:26.880s
+step:390/472 adamw rolling_loss:3.15491 train_time:26.896s
+step:390/472 muon rolling_loss:3.14281 train_time:26.913s
+step:391/472 adamw rolling_loss:3.15384 train_time:26.930s
+step:391/472 muon rolling_loss:3.14170 train_time:26.947s
+step:392/472 adamw rolling_loss:3.15497 train_time:26.963s
+step:392/472 muon rolling_loss:3.14293 train_time:26.980s
+step:393/472 adamw rolling_loss:3.15886 val_loss:3.14311 train_time:26.996s
+step:393/472 muon rolling_loss:3.14693 val_loss:3.13360 train_time:27.304s
+step:394/472 adamw rolling_loss:3.15778 train_time:27.610s
+step:394/472 muon rolling_loss:3.14588 train_time:27.626s
+step:395/472 adamw rolling_loss:3.15859 train_time:27.642s
+step:395/472 muon rolling_loss:3.14677 train_time:27.658s
+step:396/472 adamw rolling_loss:3.15649 train_time:27.674s
+step:396/472 muon rolling_loss:3.14474 train_time:27.691s
+step:397/472 adamw rolling_loss:3.15729 train_time:27.707s
+step:397/472 muon rolling_loss:3.14552 train_time:27.724s
+step:398/472 adamw rolling_loss:3.15787 train_time:27.740s
+step:398/472 muon rolling_loss:3.14615 train_time:27.756s
+step:399/472 adamw rolling_loss:3.15574 train_time:27.774s
+step:399/472 muon rolling_loss:3.14402 train_time:27.789s
+step:400/472 adamw rolling_loss:3.15530 train_time:27.805s
+step:400/472 muon rolling_loss:3.14357 train_time:27.822s
+step:401/472 adamw rolling_loss:3.15313 val_loss:3.13801 train_time:27.839s
+step:401/472 muon rolling_loss:3.14148 val_loss:3.12785 train_time:28.147s
+step:402/472 adamw rolling_loss:3.15227 train_time:28.453s
+step:402/472 muon rolling_loss:3.14059 train_time:28.469s
+step:403/472 adamw rolling_loss:3.15127 train_time:28.485s
+step:403/472 muon rolling_loss:3.13955 train_time:28.502s
+step:404/472 adamw rolling_loss:3.15236 train_time:28.517s
+step:404/472 muon rolling_loss:3.14068 train_time:28.535s
+step:405/472 adamw rolling_loss:3.14907 train_time:28.551s
+step:405/472 muon rolling_loss:3.13739 train_time:28.566s
+step:406/472 adamw rolling_loss:3.14768 train_time:28.585s
+step:406/472 muon rolling_loss:3.13604 train_time:28.602s
+step:407/472 adamw rolling_loss:3.14986 train_time:28.618s
+step:407/472 muon rolling_loss:3.13826 train_time:28.633s
+step:408/472 adamw rolling_loss:3.14690 train_time:28.651s
+step:408/472 muon rolling_loss:3.13536 train_time:28.668s
+step:409/472 adamw rolling_loss:3.14634 val_loss:3.12951 train_time:28.683s
+step:409/472 muon rolling_loss:3.13486 val_loss:3.12007 train_time:28.992s
+step:410/472 adamw rolling_loss:3.14414 train_time:29.299s
+step:410/472 muon rolling_loss:3.13269 train_time:29.314s
+step:411/472 adamw rolling_loss:3.14357 train_time:29.331s
+step:411/472 muon rolling_loss:3.13215 train_time:29.346s
+step:412/472 adamw rolling_loss:3.14307 train_time:29.364s
+step:412/472 muon rolling_loss:3.13165 train_time:29.380s
+step:413/472 adamw rolling_loss:3.13930 train_time:29.396s
+step:413/472 muon rolling_loss:3.12792 train_time:29.413s
+step:414/472 adamw rolling_loss:3.13735 train_time:29.428s
+step:414/472 muon rolling_loss:3.12601 train_time:29.445s
+step:415/472 adamw rolling_loss:3.13724 train_time:29.462s
+step:415/472 muon rolling_loss:3.12593 train_time:29.478s
+step:416/472 adamw rolling_loss:3.13465 train_time:29.494s
+step:416/472 muon rolling_loss:3.12342 train_time:29.510s
+step:417/472 adamw rolling_loss:3.13234 val_loss:3.13908 train_time:29.528s
+step:417/472 muon rolling_loss:3.12107 val_loss:3.13030 train_time:29.835s
+step:418/472 adamw rolling_loss:3.13167 train_time:30.142s
+step:418/472 muon rolling_loss:3.12042 train_time:30.157s
+step:419/472 adamw rolling_loss:3.12861 train_time:30.175s
+step:419/472 muon rolling_loss:3.11745 train_time:30.189s
+step:420/472 adamw rolling_loss:3.12930 train_time:30.206s
+step:420/472 muon rolling_loss:3.11817 train_time:30.224s
+step:421/472 adamw rolling_loss:3.12847 train_time:30.239s
+step:421/472 muon rolling_loss:3.11733 train_time:30.255s
+step:422/472 adamw rolling_loss:3.12674 train_time:30.272s
+step:422/472 muon rolling_loss:3.11560 train_time:30.290s
+step:423/472 adamw rolling_loss:3.13164 train_time:30.305s
+step:423/472 muon rolling_loss:3.12059 train_time:30.322s
+step:424/472 adamw rolling_loss:3.12998 train_time:30.339s
+step:424/472 muon rolling_loss:3.11898 train_time:30.354s
+step:425/472 adamw rolling_loss:3.13008 val_loss:3.14970 train_time:30.370s
+step:425/472 muon rolling_loss:3.11912 val_loss:3.14087 train_time:30.679s
+step:426/472 adamw rolling_loss:3.13173 train_time:30.985s
+step:426/472 muon rolling_loss:3.12081 train_time:31.001s
+step:427/472 adamw rolling_loss:3.13084 train_time:31.018s
+step:427/472 muon rolling_loss:3.11999 train_time:31.035s
+step:428/472 adamw rolling_loss:3.12890 train_time:31.050s
+step:428/472 muon rolling_loss:3.11807 train_time:31.068s
+step:429/472 adamw rolling_loss:3.12744 train_time:31.083s
+step:429/472 muon rolling_loss:3.11663 train_time:31.100s
+step:430/472 adamw rolling_loss:3.12719 train_time:31.117s
+step:430/472 muon rolling_loss:3.11642 train_time:31.133s
+step:431/472 adamw rolling_loss:3.12988 train_time:31.148s
+step:431/472 muon rolling_loss:3.11924 train_time:31.165s
+step:432/472 adamw rolling_loss:3.13151 train_time:31.183s
+step:432/472 muon rolling_loss:3.12094 train_time:31.198s
+step:433/472 adamw rolling_loss:3.13181 val_loss:3.12340 train_time:31.215s
+step:433/472 muon rolling_loss:3.12135 val_loss:3.11420 train_time:31.523s
+step:434/472 adamw rolling_loss:3.13006 train_time:31.830s
+step:434/472 muon rolling_loss:3.11961 train_time:31.845s
+step:435/472 adamw rolling_loss:3.12989 train_time:31.862s
+step:435/472 muon rolling_loss:3.11951 train_time:31.878s
+step:436/472 adamw rolling_loss:3.13071 train_time:31.896s
+step:436/472 muon rolling_loss:3.12037 train_time:31.912s
+step:437/472 adamw rolling_loss:3.12998 train_time:31.929s
+step:437/472 muon rolling_loss:3.11970 train_time:31.946s
+step:438/472 adamw rolling_loss:3.12878 train_time:31.961s
+step:438/472 muon rolling_loss:3.11854 train_time:31.977s
+step:439/472 adamw rolling_loss:3.12675 train_time:31.995s
+step:439/472 muon rolling_loss:3.11655 train_time:32.013s
+step:440/472 adamw rolling_loss:3.12501 train_time:32.030s
+step:440/472 muon rolling_loss:3.11489 train_time:32.046s
+step:441/472 adamw rolling_loss:3.12468 val_loss:3.09706 train_time:32.063s
+step:441/472 muon rolling_loss:3.11455 val_loss:3.08900 train_time:32.370s
+step:442/472 adamw rolling_loss:3.12533 train_time:32.678s
+step:442/472 muon rolling_loss:3.11520 train_time:32.694s
+step:443/472 adamw rolling_loss:3.12432 train_time:32.712s
+step:443/472 muon rolling_loss:3.11425 train_time:32.729s
+step:444/472 adamw rolling_loss:3.12461 train_time:32.747s
+step:444/472 muon rolling_loss:3.11440 train_time:32.763s
+step:445/472 adamw rolling_loss:3.12485 train_time:32.780s
+step:445/472 muon rolling_loss:3.11464 train_time:32.797s
+step:446/472 adamw rolling_loss:3.12427 train_time:32.813s
+step:446/472 muon rolling_loss:3.11400 train_time:32.831s
+step:447/472 adamw rolling_loss:3.12479 train_time:32.848s
+step:447/472 muon rolling_loss:3.11458 train_time:32.864s
+step:448/472 adamw rolling_loss:3.12222 train_time:32.881s
+step:448/472 muon rolling_loss:3.11211 train_time:32.898s
+step:449/472 adamw rolling_loss:3.12019 val_loss:3.16705 train_time:32.915s
+step:449/472 muon rolling_loss:3.11016 val_loss:3.15633 train_time:33.230s
+step:450/472 adamw rolling_loss:3.12219 train_time:33.541s
+step:450/472 muon rolling_loss:3.11211 train_time:33.556s
+step:451/472 adamw rolling_loss:3.12398 train_time:33.573s
+step:451/472 muon rolling_loss:3.11389 train_time:33.588s
+step:452/472 adamw rolling_loss:3.12560 train_time:33.605s
+step:452/472 muon rolling_loss:3.11554 train_time:33.622s
+step:453/472 adamw rolling_loss:3.12635 train_time:33.638s
+step:453/472 muon rolling_loss:3.11632 train_time:33.654s
+step:454/472 adamw rolling_loss:3.12844 train_time:33.672s
+step:454/472 muon rolling_loss:3.11839 train_time:33.687s
+step:455/472 adamw rolling_loss:3.12920 train_time:33.703s
+step:455/472 muon rolling_loss:3.11913 train_time:33.720s
+step:456/472 adamw rolling_loss:3.12561 train_time:33.736s
+step:456/472 muon rolling_loss:3.11556 train_time:33.754s
+step:457/472 adamw rolling_loss:3.12576 val_loss:3.12858 train_time:33.770s
+step:457/472 muon rolling_loss:3.11578 val_loss:3.12043 train_time:34.078s
+step:458/472 adamw rolling_loss:3.12751 train_time:34.384s
+step:458/472 muon rolling_loss:3.11756 train_time:34.400s
+step:459/472 adamw rolling_loss:3.12724 train_time:34.416s
+step:459/472 muon rolling_loss:3.11729 train_time:34.433s
+step:460/472 adamw rolling_loss:3.12768 train_time:34.449s
+step:460/472 muon rolling_loss:3.11777 train_time:34.467s
+step:461/472 adamw rolling_loss:3.12750 train_time:34.482s
+step:461/472 muon rolling_loss:3.11766 train_time:34.498s
+step:462/472 adamw rolling_loss:3.12661 train_time:34.514s
+step:462/472 muon rolling_loss:3.11680 train_time:34.530s
+step:463/472 adamw rolling_loss:3.12449 train_time:34.548s
+step:463/472 muon rolling_loss:3.11468 train_time:34.564s
+step:464/472 adamw rolling_loss:3.12664 train_time:34.580s
+step:464/472 muon rolling_loss:3.11687 train_time:34.596s
+step:465/472 adamw rolling_loss:3.12455 val_loss:3.10265 train_time:34.612s
+step:465/472 muon rolling_loss:3.11480 val_loss:3.09301 train_time:34.921s
+step:466/472 adamw rolling_loss:3.12214 train_time:35.227s
+step:466/472 muon rolling_loss:3.11239 train_time:35.243s
+step:467/472 adamw rolling_loss:3.12260 train_time:35.260s
+step:467/472 muon rolling_loss:3.11286 train_time:35.276s
+step:468/472 adamw rolling_loss:3.12045 train_time:35.292s
+step:468/472 muon rolling_loss:3.11077 train_time:35.310s
+step:469/472 adamw rolling_loss:3.11507 train_time:35.325s
+step:469/472 muon rolling_loss:3.10545 train_time:35.341s
+step:470/472 adamw rolling_loss:3.11424 train_time:35.358s
+step:470/472 muon rolling_loss:3.10462 train_time:35.375s
+step:471/472 adamw rolling_loss:3.11476 train_time:35.390s
+step:471/472 muon rolling_loss:3.10512 train_time:35.406s
+step:472/472 adamw rolling_loss:3.11598 train_time:35.423s
+step:472/472 muon rolling_loss:3.10639 train_time:35.439s

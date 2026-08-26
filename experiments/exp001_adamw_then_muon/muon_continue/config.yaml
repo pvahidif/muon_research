@@ -25,7 +25,6 @@ runs:
     override: *OVERRIDE
     continue_steps: 256
     metric_schedule: *metric_schedule
-
   - name: adamw_no_reset
     path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw/step_000100
     checkpoint_step: [101, 104, 116]
@@ -33,7 +32,6 @@ runs:
     override: *OVERRIDE
     continue_steps: 256
     metric_schedule: *metric_schedule
-
   - name: adamw_no_reset
     path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw/step_000200
     checkpoint_step: [201, 204, 216]
@@ -41,7 +39,6 @@ runs:
     override: *OVERRIDE
     continue_steps: 256
     metric_schedule: *metric_schedule
-
   - name: adamw_no_reset
     path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw/step_000500
     checkpoint_step: [501, 504, 516]
@@ -49,9 +46,75 @@ runs:
     override: *OVERRIDE
     continue_steps: 256
     metric_schedule: *metric_schedule
-
   - name: adamw_no_reset
     path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw/step_001000
+    checkpoint_step: [1001, 1004, 1016]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+
+
+  - name: adamw_no_reset_seed1338
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1338/step_000200
+    checkpoint_step: [201, 204, 216]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+  - name: adamw_no_reset_seed1338
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1338/step_000500
+    checkpoint_step: [501, 504, 516]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+  - name: adamw_no_reset_seed1338
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1338/step_001000
+    checkpoint_step: [1001, 1004, 1016]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+
+  - name: adamw_no_reset_seed1339
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1339/step_000200
+    checkpoint_step: [201, 204, 216]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+  - name: adamw_no_reset_seed1339
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1339/step_000500
+    checkpoint_step: [501, 504, 516]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+  - name: adamw_no_reset_seed1339
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1339/step_001000
+    checkpoint_step: [1001, 1004, 1016]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+
+  - name: adamw_no_reset_seed1340
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1340/step_000200
+    checkpoint_step: [201, 204, 216]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+  - name: adamw_no_reset_seed1340
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1340/step_000500
+    checkpoint_step: [501, 504, 516]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+  - name: adamw_no_reset_seed1340
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1340/step_001000
     checkpoint_step: [1001, 1004, 1016]
     branch_names: [adamw, muon]
     override: *OVERRIDE
@@ -68,7 +131,6 @@ runs:
     metric_schedule: *metric_schedule
     reset_optimizer_state: true
     warmup_steps: 10
-
   - name: adamw_with_reset
     path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw/step_000500
     checkpoint_step: [501, 504, 516]
@@ -78,7 +140,6 @@ runs:
     metric_schedule: *metric_schedule
     reset_optimizer_state: true
     warmup_steps: 10
-
   - name: adamw_with_reset
     path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw/step_001000
     checkpoint_step: [1001, 1004, 1016]
@@ -88,3 +149,88 @@ runs:
     metric_schedule: *metric_schedule
     reset_optimizer_state: true
     warmup_steps: 10
+
+  - name: adamw_with_reset_seed1338
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1338/step_000200
+    checkpoint_step: [201, 204, 216]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+    reset_optimizer_state: true
+    warmup_steps: 10
+  - name: adamw_with_reset_seed1338
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1338/step_000500
+    checkpoint_step: [501, 504, 516]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+    reset_optimizer_state: true
+    warmup_steps: 10
+  - name: adamw_with_reset_seed1338
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1338/step_001000
+    checkpoint_step: [1001, 1004, 1016]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+    reset_optimizer_state: true
+    warmup_steps: 10
+
+  - name: adamw_with_reset_seed1339
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1339/step_000200
+    checkpoint_step: [201, 204, 216]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+    reset_optimizer_state: true
+    warmup_steps: 10
+  - name: adamw_with_reset_seed1339
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1339/step_000500
+    checkpoint_step: [501, 504, 516]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+    reset_optimizer_state: true
+    warmup_steps: 10
+  - name: adamw_with_reset_seed1339
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1339/step_001000
+    checkpoint_step: [1001, 1004, 1016]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+    reset_optimizer_state: true
+    warmup_steps: 10
+
+  - name: adamw_with_reset_seed1340
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1340/step_000200
+    checkpoint_step: [201, 204, 216]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+    reset_optimizer_state: true
+    warmup_steps: 10
+  - name: adamw_with_reset_seed1340
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1340/step_000500
+    checkpoint_step: [501, 504, 516]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+    reset_optimizer_state: true
+    warmup_steps: 10
+  - name: adamw_with_reset_seed1340
+    path: experiments/exp001_adamw_then_muon/muon_checkpoints/adamw_seed1340/step_001000
+    checkpoint_step: [1001, 1004, 1016]
+    branch_names: [adamw, muon]
+    override: *OVERRIDE
+    continue_steps: 256
+    metric_schedule: *metric_schedule
+    reset_optimizer_state: true
+    warmup_steps: 10
+
